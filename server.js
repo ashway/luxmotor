@@ -32,7 +32,7 @@ fastify.register((fastify, opts, next) => {
         try {
           await bot.sendMessage(-1001397757254, `${new Date().toLocaleString('ru')}\n${data.fio}\n<a href="tel:${data.phone}">${data.phone}</a>`, { parse_mode: 'HTML' });
         } catch(err) {
-          console.log(err.code);
+          //console.log(err.code);
         }
 
         reply.header('Content-Type', 'application/json').code(200);
