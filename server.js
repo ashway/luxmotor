@@ -26,10 +26,8 @@ fastify.register((fastify, opts, next) => {
 
       fastify.post('/api/sendRequest',  async(req, reply) => {
         let bot = new TelegramBot('556896286:AAH791dcePJHlImFEs3HYryHa8HDRljMyW4', {
-          polling: false,
-          request: {
-            proxy: 'sock5://2.234.226.32:17779'
-          }});
+          polling: false
+        });
         let data = req.body;
         try {
           await bot.sendMessage(-1001397757254, `${new Date().toLocaleString('ru')}\n${data.fio}\n<a href="tel:${data.phone}">${data.phone}</a>`, { parse_mode: 'HTML' });
