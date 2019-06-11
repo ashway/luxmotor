@@ -13,10 +13,15 @@ import carList from '../infolib/cars.js';
 import Car from '../components/car.jsx';
 
 class CarsPage extends React.Component {
+
+    state = { mobileOpen: false };
+
     static async getInitialProps({ asPath  }) {
         let split = asPath.split('/');
         return { mark: split[2], model: split[3]  }
     }
+
+    toggleMobileCatalogList = () => { this.setState({ mobileOpen: !this.state.mobileOpen })};
 
     render() {
         let page = this.props.model || this.props.mark;
@@ -50,8 +55,8 @@ class CarsPage extends React.Component {
                                 <div className="h1 w100 mr60 show-from-tablet">{`${model.mark || ''} ${model.model || ''}`}</div>
 
                                 <div className="inner-page-text hide-after-mobile">
-                                    <div className="current-car-mobile opened taleft h2 bold">{`${model.mark || ''} ${model.model || ''}`}</div>
-                                    <div className="cars-list-mobile show">
+                                    <div className={`current-car-mobile taleft h2 bold ${(this.state.mobileOpen)?'opened':''}`} onClick={()=>this.toggleMobileCatalogList()}>{`${model.mark || ''} ${model.model || ''}`}</div>
+                                    <div className={`cars-list-mobile ${(this.state.mobileOpen)?'show':''}`}>
                                         {_.map(catalog, item=>(item.sub)?
                                             _.map(item.sub, subitem=><Link key={subitem.alias} href={`/cars/${item.alias}/${subitem.alias}`}><a className={`${(subitem.alias==page)?'active':''}`}>{subitem.name}</a></Link>):
                                             <Link key={item.alias} href={`/cars/${item.alias}`}><a className={`${(item.alias==page)?'active':''}`}>{item.name}</a></Link>) }
@@ -59,23 +64,34 @@ class CarsPage extends React.Component {
                                 </div>
 
                                 <div className="cars-price">
-                                    <div className="mr30">
+                                    <div>
                                         <div>Время</div>
-                                        <div className="h2 bold nowrap blue">от 3 часов</div>
+                                        <div className="h3 bold nowrap blue">{`от ${model.mintime || '3'} часов`}</div>
                                     </div>
                                     <div>
                                         <div>Цена</div>
-                                        <div className="h2 bold nowrap blue">2000р в час</div>
+                                        <div className="h3 bold nowrap blue">{`от ${model.price}р в час`}</div>
                                     </div>
+                                    {(model.runprice && model.runprice>0)?<div>
+                                        <div>Пригород</div>
+                                        <div className="h3 bold nowrap blue">{`от ${model.runprice}р за км`}</div>
+                                    </div>:null}
                                 </div>
+
                             </div>
-                            {(carInfo)?<div className="auto-card-container small" style={{ marginBottom: 0 }}>
+                            {(carInfo && carInfo.length>0)?<div className="auto-card-container small" style={{ marginBottom: 0 }}>
                                 {_.map(carInfo, (item, i)=><Car key={i} index={i+1} model={page} data={item}/>)}
                             </div>:<div className="h2 tacenter mb60">К сожалению, на данный момент мы не можем предложить вам автомобили этого класса</div>}
 
+                            <div className="mb40 mt20 extrasmall-font flex-block">
+                                <div className="attention mr20">!</div>
+                                <div>
+                                    <div>Междугородний пробег оплачивается в обе стороны</div>
+                                    <div>Подача и возврат за пределы Екатеринбурга оплачивается дополнительно</div>
+                                </div>
+                            </div>
 
-
-                            <InnerPageOrderForm />
+                            <InnerPageOrderForm/>
                         </div>
                     </div>
                 </div>

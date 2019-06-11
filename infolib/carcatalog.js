@@ -5,7 +5,9 @@ export default [
     ]},
     { alias: 'business', name: 'Бизнес-класс', sub: [
         { alias: 'camry', name: 'Toyota Camry' },
+        { alias: 'bmw7', name: 'BMW 7 series' },
         { alias: 'eclass', name: 'Mercedes Benz E-class' },
+
         { alias: 'optima', name: 'KIA Optima' },
     ]},
     { alias: 'minivan', name: 'Минивэны', sub: [
@@ -13,7 +15,9 @@ export default [
         { alias: 'vclass', name: 'Mercedes Benz V-class'},
         { alias: 'h1', name: 'Hyundai H-1' },
     ]},
-    { alias: 'microbus', name: 'Микроавтобусы' },
+    { alias: 'microbus', name: 'Микроавтобусы', sub: [
+            { alias: 'sprinter', name: 'Mercedes Benz Sprinter'},
+        ] },
     { alias: 'suv', name: 'Внедорожники', sub: [
         { alias: 'tlc200', name: 'Toyota Land Cruiser 200'},
     ] },

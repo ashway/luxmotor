@@ -4,7 +4,8 @@ export default {
         model: 'W222',
         image: '/static/img/catalog/w222.jpg',
         url: '/cars/premium/w222',
-        price: 2000
+        price: 2000,
+        runprice: 40,
     },
 
     w221: {
@@ -12,7 +13,8 @@ export default {
         model: 'W221',
         image: '/static/img/catalog/w221.jpg',
         url: '/cars/premium/w221',
-        price: 1800
+        price: 1800,
+        runprice: 35,
     },
 
     camry: {
@@ -20,15 +22,17 @@ export default {
         model: 'Camry',
         image: '/static/img/catalog/camry.jpg',
         url: '/cars/business/camry',
-        price: 800
+        price: 800,
+        runprice: 25,
     },
 
     viano: {
         mark: 'Mercedes Benz',
         model: 'Viano',
-        image: '/static/img/catalog/viano1.jpg',
+        image: '/static/img/cars/viano/2/1.jpg',
         url: '/cars/minivan/viano',
-        price: 1200
+        price: 1200,
+        runprice: 35,
     },
 
     vclass: {
@@ -36,7 +40,17 @@ export default {
         model: 'V-class',
         image: '/static/img/catalog/viano.jpg',
         url: '/cars/minivan/vclass',
-        price: 1200
+        price: 1200,
+        runprice: 35,
+    },
+
+    bmw7: {
+        mark: 'BMW',
+        model: '7 series',
+        image: '/static/img/bmw5/1/1.jpg',
+        url: '/cars/business/bmw5',
+        price: 1300,
+        runprice: 35,
     },
 
     eclass: {
@@ -44,105 +58,113 @@ export default {
         model: 'E-class',
         image: '/static/img/catalog/mers-e.jpg',
         url: '/cars/business/eclass',
-        price: 700
+        price: 700,
+        runprice: 25,
     },
 
     sprinter: {
         mark: 'Mercedes Benz',
         model: 'Sprinter',
-        image: '/static/img/catalog/sprinter.jpg',
-        url: '/cars/microbus',
-        price: 1200
+        image: '/static/img/cars/sprinter/1/1.jpg',
+        url: '/cars/minivan/sprinter',
+        price: 1200,
+        runprice: 35,
     },
 
     fordthunderbird: {
+        isCar: true,
         mark: 'Ford',
         model: 'Thunderbird',
-        image: '/static/img/cars/retro/23.jpg',
-        price: 1200
+        index: 1,
+        type: 'retro',
+        price: 2500
     },
 
     plymouthfury: {
+        isCar: true,
         mark: 'Plymouth',
         model: 'Fury',
-        image: '/static/img/cars/retro/24.jpg',
-        price: 1200
+        index: 2,
+        type: 'retro',
+        price: 2600
     },
 
     HigerKLQ6826Q: {
+        isCar: true,
         mark: 'Higer',
         model: 'KLQ 6826 Q',
-        image: '/static/img/cars/bus/1.jpg',
         capacity: 53,
         price: 1800,
-        runprice: 53
+        runprice: 53,
+        index: 1,
+        type: 'bus',
     },
 
     HigerKLQ6826Qurl: {
         mark: 'Higer',
         model: 'KLQ 6826 Q',
-        image: '/static/img/cars/bus/1.jpg',
+        image: '/static/img/cars/bus/1/1.jpg',
         capacity: 53,
         url: '/cars/bus',
         price: 1800,
+        mintime: 4,
         runprice: 53
     },
 
     YutongZK6122H9: {
+        isCar: true,
         mark: 'Yutong',
         model: 'ZK 6122 H9',
-        image: '/static/img/cars/bus/2.jpg',
         capacity: 35,
         price: 1500,
-        runprice: 35
+        mintime: 4,
+        runprice: 35,
+        index: 2,
+        type: 'bus',
     },
 
     optima: {
         mark: 'KIA',
         model: 'Optima',
-        image: '/static/img/catalog/sprinter.jpg',
+        image: '/static/img/cars/optima/1/1.jpg',
         price: 800,
+        runprice: 25,
     },
 
     h1: {
         mark: 'Hyundai',
         model: 'H-1',
         image: '/static/img/catalog/sprinter.jpg',
-        price: 800
+        price: 800,
+        runprice: 25
     },
 
     tlc200: {
         mark: 'Toyota',
         model: 'Land Cruiser 200',
-        image: '/static/img/cars/suv/1.jpg',
+        image: '/static/img/cars/tlc200/1/1.jpg',
         url: '/cars/suv/tlc200',
-        price: 1300
+        price: 1300,
+        runprice: 35,
     },
 
     //-- Catalog pages
 
-    microbus: {
-        model: 'Микроавтобусы',
-        price: 1200,
-        time: 3
-    },
-
     bus: {
         model: 'Автобусы',
         price: 1500,
-        time: 4
+        mintime: 4,
+        runprice: 35
     },
 
     retro: {
         model: 'Ретроавтомобили',
         price: 2500,
-        time: 3
     },
 
     limousine: {
         model: 'Лимузины',
         price: 2000,
-        time: 3
     }
 
 };
