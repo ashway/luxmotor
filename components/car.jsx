@@ -4,6 +4,7 @@ import _ from 'lodash';
 import "../scss/style.scss";
 import carsCatalog from '../infolib/carmodels.js';
 import React from "react";
+import PreloadImage from 'react-preload-image'
 
 class Car extends React.Component {
 
@@ -42,7 +43,7 @@ class Car extends React.Component {
                     <ReactSwipe className="car-p-photos"
                         swipeOptions={{ continuous: true }}
                         ref={el => (this.reactSwipeEl = el)}>
-                        {_.map([ ...Array(car.photos).keys() ], index=><div key={index}><div style={{ backgroundImage: `url(/static/img/cars/${this.props.model}/${this.props.index}/${index+1}.jpg)` }}/></div>)}
+                        {_.map([ ...Array(car.photos).keys() ], index=><div key={index}><PreloadImage src={`/static/img/cars/${this.props.model}/${this.props.index}/${index+1}.jpg`} /></div>)}
                     </ReactSwipe>
                     <div className="car-p-controls">
                         <div className="close" onClick={()=>this.toggleInfo(false)}/>
