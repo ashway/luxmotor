@@ -27,7 +27,7 @@ class RequestFormInner extends React.Component {
 
         if(this.state.fio && this.state.phone) {
             this.setState({sending: true });
-            await axios.post('http://localhost:3000/api/sendRequest', { fio: this.state.fio, phone: this.state.phone });
+            await axios.post('http://dev.lux-motor.ru/api/sendRequest', { fio: this.state.fio, phone: this.state.phone });
             this.setState({ isSent: true });
         }
     }
@@ -40,7 +40,7 @@ class RequestFormInner extends React.Component {
                 <div className="h-fields">
                     <div><input className={`fio-field text-field w100 ${(this.state.fioHasError)?'has-error':''}`} onChange={(e)=>this.handleChange(e, 'fio')} placeholder="ФИО" value={this.state.fio} /></div>
                     <div><input className={`phone-field text-field w100 ${(this.state.phoneHasError)?'has-error':''}`} onChange={(e)=>this.handleChange(e, 'phone')} placeholder="Контактный телефон"  value={this.state.phone}/></div>
-                    <div><div className={`sendMailButton button ${(this.state.sending)?'processing':''}`} onClick={()=>this.sendRequest()} style={{ whiteSpace: `nowrap`}}>{(this.state.sending)?'Отправляю ⇪':'Оставить заявку'}</div></div>
+                    <div><div className={`sendMailButton button ${(this.state.sending)?'processing':''}`} onClick={()=>this.sendRequest()} style={{ whiteSpace: `nowrap`}}>{(this.state.sending)?'Отправляю':'Оставить заявку'}</div></div>
                 </div>
             </div>
 

@@ -94,7 +94,7 @@ export default {
         mark: 'Higer',
         model: 'KLQ 6826 Q',
         capacity: 53,
-        price: 1800,
+        price: 2000,
         runprice: 53,
         index: 1,
         type: 'bus',
@@ -106,7 +106,7 @@ export default {
         image: '/static/img/cars/bus/1/1.jpg',
         capacity: 53,
         url: '/cars/bus',
-        price: 1800,
+        price: 2000,
         mintime: 4,
         runprice: 53
     },
@@ -116,7 +116,7 @@ export default {
         mark: 'Yutong',
         model: 'ZK 6122 H9',
         capacity: 35,
-        price: 1500,
+        price: 1600,
         mintime: 4,
         runprice: 35,
         index: 2,
@@ -152,7 +152,7 @@ export default {
 
     bus: {
         model: 'Автобусы',
-        price: 1500,
+        price: 1600,
         mintime: 4,
         runprice: 35
     },
