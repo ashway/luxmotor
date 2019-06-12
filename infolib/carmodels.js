@@ -2,7 +2,7 @@ export default {
     w222: {
         mark: 'Mercedes Benz',
         model: 'W222',
-        image: '/static/img/catalog/w222.jpg',
+        image: '/static/img/cars/w222/2/1.jpg',
         url: '/cars/premium/w222',
         price: 2000,
         runprice: 40,
@@ -11,7 +11,7 @@ export default {
     w221: {
         mark: 'Mercedes Benz',
         model: 'W221',
-        image: '/static/img/catalog/w221.jpg',
+        image: '/static/img/cars/w221/2/3.jpg',
         url: '/cars/premium/w221',
         price: 1800,
         runprice: 35,
@@ -20,7 +20,7 @@ export default {
     camry: {
         mark: 'Toyota',
         model: 'Camry',
-        image: '/static/img/catalog/camry.jpg',
+        image: '/static/img/cars/camry/5/1.jpg',
         url: '/cars/business/camry',
         price: 800,
         runprice: 25,
@@ -38,7 +38,7 @@ export default {
     vclass: {
         mark: 'Mercedes Benz',
         model: 'V-class',
-        image: '/static/img/catalog/viano.jpg',
+        image: '/static/img/cars/vclass/1/1.jpg',
         url: '/cars/minivan/vclass',
         price: 1200,
         runprice: 35,
@@ -131,10 +131,10 @@ export default {
         runprice: 25,
     },
 
-    h1: {
+    starex: {
         mark: 'Hyundai',
-        model: 'H-1',
-        image: '/static/img/catalog/sprinter.jpg',
+        model: 'Starex',
+        image: '/static/img/car/1/1.jpg',
         price: 800,
         runprice: 25
     },

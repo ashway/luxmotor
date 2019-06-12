@@ -13,7 +13,7 @@ export default [
     { alias: 'minivan', name: 'Минивэны', sub: [
         { alias: 'viano', name: 'Mercedes Benz Viano'},
         { alias: 'vclass', name: 'Mercedes Benz V-class'},
-        { alias: 'h1', name: 'Hyundai H-1' },
+        { alias: 'starex', name: 'Hyundai Starex' },
     ]},
     { alias: 'microbus', name: 'Микроавтобусы', sub: [
             { alias: 'sprinter', name: 'Mercedes Benz Sprinter'},

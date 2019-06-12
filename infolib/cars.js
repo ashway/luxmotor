@@ -66,7 +66,7 @@ export default {
         { photos: 4 },
     ],
 
-    h1: [
+    starex: [
         { photos: 6 }
     ],
 
