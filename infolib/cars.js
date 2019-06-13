@@ -21,6 +21,11 @@ export default {
     optima: [
         { photos: 4 }
     ],
+
+    eclass: [
+        { photos: 2 }
+    ],
+
     camry: [
         { photos: 5 },
         { photos: 4 },
@@ -32,6 +37,11 @@ export default {
         { photos: 3 },
         { photos: 1 },
         { photos: 4 },
+    ],
+
+    range: [
+        { photos: 7, price: 2200 },
+        { photos: 8, price: 2500 },
     ],
 
     retro: [
@@ -59,15 +69,18 @@ export default {
         { photos: 4 },
         { photos: 5 }
     ],
+
     vclass: [
         { photos: 5 },
         { photos: 6 },
         { photos: 5 },
         { photos: 4 },
+        { photos: 8 },
     ],
 
     starex: [
-        { photos: 6 }
+        { photos: 6 },
+        { photos: 5 }
     ],
 
     bus: [

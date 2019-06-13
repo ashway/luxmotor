@@ -56,7 +56,7 @@ export default {
     eclass: {
         mark: 'Mercedes Benz',
         model: 'E-class',
-        image: '/static/img/catalog/mers-e.jpg',
+        image: '/static/img/cars/eclass/1/1.jpg',
         url: '/cars/business/eclass',
         price: 700,
         runprice: 25,
@@ -146,6 +146,15 @@ export default {
         url: '/cars/suv/tlc200',
         price: 1300,
         runprice: 35,
+    },
+
+    range: {
+        mark: 'Land Rover',
+        model: 'Range Rover',
+        image: '/static/img/cars/range/1/1.jpg',
+        url: '/cars/suv/range',
+        price: 2200,
+        runprice: 42,
     },
 
     //-- Catalog pages

@@ -20,6 +20,8 @@ export default [
         ] },
     { alias: 'suv', name: 'Внедорожники', sub: [
         { alias: 'tlc200', name: 'Toyota Land Cruiser 200'},
+        { alias: 'range', name: 'Land Rover Range Rover'},
+
     ] },
     { alias: 'bus', name: 'Автобусы' },
     { alias: 'retro', name: 'Ретроавтомобили' },
