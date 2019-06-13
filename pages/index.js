@@ -173,8 +173,8 @@ export default () => {
             </div>
             <div className="content mb60 mt20">
                 <div className="h1 bold tacenter mb40">У нас вы можете заказать</div>
-                <div className="auto-card-container">
-                    {_.map(['w222','w221','camry','HigerKLQ6826Qurl','sprinter','vclass','viano','eclass'], alias=><CarModel key={alias} alias={alias}/>)}
+                <div className="auto-card-container align-center">
+                    {_.map(['w222','w221','camry','HigerKLQ6826Qurl','sprinter','range','vclass','tlc200','viano','eclass'], alias=><CarModel key={alias} alias={alias}/>)}
                 </div>
             </div>
             <Footer/>

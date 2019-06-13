@@ -821,6 +821,10 @@ a { text-decoration: none; color: #303030; }
     @include flex($justify: flex-start, $align: flex-start);
     @include margin-between-horizontal(0);
     flex-wrap: wrap;
+
+    &.align-center {
+      justify-content: center;
+    }
   }
 
   .auto-card {
