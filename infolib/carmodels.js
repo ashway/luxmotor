@@ -154,7 +154,16 @@ export default {
         image: '/static/img/cars/range/1/1.jpg',
         url: '/cars/suv/range',
         price: 2200,
-        runprice: 42,
+        runprice: 45,
+    },
+
+    a8: {
+        mark: 'Audi',
+        model: 'A8',
+        image: '/static/img/cars/a8/1/1.jpg',
+        url: '/cars/premium/a8',
+        price: 2300,
+        runprice: 45,
     },
 
     //-- Catalog pages

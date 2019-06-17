@@ -905,8 +905,13 @@ a { text-decoration: none; color: #303030; }
     }
 
     @include respond-to(tablet) {
+      width: 50%;
+      border: 5px solid transparent;
+    }
+
+    @include respond-to(desktop) {
       width: 33.333%;
-      border: 15px solid transparent;
+      border: 10px solid transparent;
     }
 
   }

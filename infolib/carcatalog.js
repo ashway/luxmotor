@@ -2,6 +2,7 @@ export default [
     { alias: 'premium', name: 'Премиум-класс', sub: [
         { alias:'w222', name: 'Mercedes Benz W222'},
         { alias: 'w221', name: 'Mercedes Benz W221' },
+        { alias: 'a8', name: 'Audi A8' },
     ]},
     { alias: 'business', name: 'Бизнес-класс', sub: [
         { alias: 'camry', name: 'Toyota Camry' },

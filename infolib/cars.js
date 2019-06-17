@@ -8,6 +8,7 @@ export default {
         { photos: 3 },
         { photos: 3 },
         { photos: 7 },
+        { photos: 7 },
     ],
 
     w221: [
@@ -42,6 +43,10 @@ export default {
     range: [
         { photos: 7, price: 2200 },
         { photos: 8, price: 2500 },
+    ],
+
+    a8: [
+        { photos: 8 },
     ],
 
     retro: [
