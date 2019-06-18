@@ -38,7 +38,6 @@ export default () => {
                         <div className="hc-social">
                             <a href="https://wa.me/79089084811" className="socialicon round WHATSAPP"/>
                             <a href="" className="socialicon round TELEGRAM"/>
-                            <div className="socialicon round INSTAGRAM" />
                         </div>
                     </div>
                 </div>

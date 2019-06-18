@@ -8,6 +8,7 @@ export default (props) => {
             <title>{props.title}</title>
             <link rel="shortcut icon" href="/static/favicon/favicon.ico" type="image/x-icon"/>
             <meta name="description" content={props.description} />
+            {(props.keywords)?<meta name="keywords" content={props.keywords} />:null}
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
             <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet" />
             <link rel="icon" href="/static/favicon/favicon.ico" type="image/x-icon" />

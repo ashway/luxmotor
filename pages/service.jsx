@@ -137,7 +137,7 @@ class ServicePage extends React.Component {
         let pageInfo = services[this.props.page];
         return (pageInfo)?(
             <div>
-                <Header title={pageInfo.title} description={pageInfo.description} />
+                <Header title={pageInfo.title} description={pageInfo.description} keywords={pageInfo.keywords} />
                 <div className="base-content">
                     <InnerPageHeader caption={pageInfo.caption} background="static/img/service-bg/premiumcar.jpg" />
                     <div className="content mb50minus service-page">
