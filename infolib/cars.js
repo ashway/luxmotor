@@ -55,12 +55,11 @@ export default {
     ],
 
     sprinter: [
-        { photos: 5 },
+        { photos: 5, price: 1300, capacity: 8 },
         { photos: 5 },
         { photos: 1 },
         { photos: 4 },
         { photos: 3 },
-        { photos: 4, price: 1300, capacity: 8 },
     ],
 
     tlc200: [
