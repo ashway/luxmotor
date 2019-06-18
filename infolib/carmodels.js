@@ -40,7 +40,7 @@ export default {
         model: 'V-class',
         image: '/static/img/cars/vclass/1/1.jpg',
         url: '/cars/minivan/vclass',
-        price: 1200,
+        price: 1500,
         runprice: 35,
     },
 
