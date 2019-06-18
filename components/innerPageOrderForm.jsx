@@ -27,7 +27,7 @@ class RequestFormInner extends React.Component {
 
         if(this.state.fio && this.state.phone) {
             this.setState({sending: true });
-            await axios.post('http://dev.lux-motor.ru/api/sendRequest', { fio: this.state.fio, phone: this.state.phone });
+            await axios.post('https://lux-motor.ru/api/sendRequest', { fio: this.state.fio, phone: this.state.phone });
             this.setState({ isSent: true });
         }
     }
