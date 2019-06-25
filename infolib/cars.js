@@ -69,6 +69,14 @@ export default {
         { photos: 7 }
     ],
 
+    gelic: [
+        { photos: 4 },
+    ],
+
+    lx: [
+        { photos: 6 },
+    ],
+
     viano: [
         { photos: 4 },
         { photos: 5 }

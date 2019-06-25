@@ -139,6 +139,24 @@ export default {
         runprice: 25
     },
 
+    gelic: {
+        mark: 'Mercedes',
+        model: 'Gelandewagen',
+        image: '/static/img/cars/gelic/1/1.jpg',
+        url: '/cars/suv/gelic',
+        price: 1500,
+        runprice: 35,
+    },
+
+    lx: {
+        mark: 'Lexus',
+        model: 'LX',
+        image: '/static/img/cars/lx/1/1.jpg',
+        url: '/cars/suv/lx',
+        price: 1600,
+        runprice: 35,
+    },
+
     tlc200: {
         mark: 'Toyota',
         model: 'Land Cruiser 200',
