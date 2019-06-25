@@ -150,7 +150,7 @@ export default {
 
     lx: {
         mark: 'Lexus',
-        model: 'LX',
+        model: 'LX570',
         image: '/static/img/cars/lx/1/1.jpg',
         url: '/cars/suv/lx',
         price: 1600,
