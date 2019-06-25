@@ -20,9 +20,10 @@ export default [
             { alias: 'sprinter', name: 'Mercedes Benz Sprinter'},
         ] },
     { alias: 'suv', name: 'Внедорожники', sub: [
+        { alias: 'gelic', name: 'Mercedes Gelandewagen'},
+        { alias: 'lx', name: 'Lexus LX'},
         { alias: 'tlc200', name: 'Toyota Land Cruiser 200'},
         { alias: 'range', name: 'Land Rover Range Rover'},
-
     ] },
     { alias: 'bus', name: 'Автобусы' },
     { alias: 'retro', name: 'Ретроавтомобили' },
