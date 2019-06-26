@@ -24,6 +24,7 @@ class Car extends React.Component {
 
         return (car) ? <div className="auto-card-fullinfo">
             <div onClick={()=>this.toggleInfo(true)} style={{ backgroundImage: `url(/static/img/cars/${this.props.model}/${this.props.index}/1.jpg)` }}>
+                <img className="imgse" src={`/static/img/cars/${this.props.model}/${this.props.index}/1.jpg`}/>
                 {(car.capacity)?<div className="ac-capacity">{car.capacity} {(car.capacity%100%10>0&&car.capacity%100%10<5)?(car.capacity%100%10===1)?'место':'места':'мест'}</div>:null}
             </div>
             {(car.mark || car.model)?<div className="h3 bold">{car.mark || ''} {car.model || ''}</div>:null}
@@ -43,7 +44,10 @@ class Car extends React.Component {
                     <ReactSwipe className="car-p-photos"
                         swipeOptions={{ continuous: true }}
                         ref={el => (this.reactSwipeEl = el)}>
-                        {_.map([ ...Array(car.photos).keys() ], index=><div key={index}><PreloadImage src={`/static/img/cars/${this.props.model}/${this.props.index}/${index+1}.jpg`} /></div>)}
+                        {_.map([ ...Array(car.photos).keys() ], index=><div key={index}>
+                            <img className="imgse" src={`/static/img/cars/${this.props.model}/${this.props.index}/${index+1}.jpg`} alt=""/>
+                            <PreloadImage src={`/static/img/cars/${this.props.model}/${this.props.index}/${index+1}.jpg`} />
+                            </div>)}
                     </ReactSwipe>
                     <div className="car-p-controls">
                         <div className="close" onClick={()=>this.toggleInfo(false)}/>

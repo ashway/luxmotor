@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { YMInitializer } from 'react-yandex-metrika';
 
 export default (props) => {
     return (
@@ -13,12 +12,6 @@ export default (props) => {
             <meta name="yandex-verification" content="8087dc9960c4a99a" />
             <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet" />
             <link rel="icon" href="/static/favicon/favicon.ico" type="image/x-icon" />
-            <YMInitializer accounts={[53717281]} options={{
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true,
-            webvisor:true
-            }} />
         </Head>
     )
 }
