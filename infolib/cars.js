@@ -82,6 +82,10 @@ export default {
         { photos: 5 }
     ],
 
+    limousine: [
+        { photos: 4 },
+        ],
+
     vclass: [
         { photos: 5 },
         { photos: 6 },

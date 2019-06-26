@@ -876,12 +876,10 @@ a { text-decoration: none; color: #303030; }
     border-style: solid;
     box-sizing: border-box;
 
-    &:hover {
-      &>div {
-        &:first-child {
-         top: -2px;
-        }
-      }
+    .imgse {
+      position: absolute;
+      width: 0; height: 0;
+      opacity: 0;
     }
 
     &>div {
@@ -890,13 +888,12 @@ a { text-decoration: none; color: #303030; }
         background-color: #f0f0f0;
         border-radius: 15px;
         background-position: center center;
-        width: 100%;
+        width: calc(100%);
         padding-top: 65%;
         background-repeat: no-repeat;
         background-size: cover;
         margin-bottom: 10px;
         cursor: pointer;
-        transition: top ease-out 400ms;
       }
     }
 
