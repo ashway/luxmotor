@@ -26,6 +26,16 @@ export default {
         runprice: 25,
     },
 
+    m6: {
+        mark: 'Mazda',
+        model: '6',
+        image: '/static/img/cars/m6/1/1.jpg',
+        url: '/cars/business/m6',
+        price: 800,
+        mintime: 4,
+        runprice: 25,
+    },
+
     viano: {
         mark: 'Mercedes Benz',
         model: 'Viano',
@@ -184,6 +194,16 @@ export default {
         runprice: 45,
     },
 
+    a6: {
+        mark: 'Audi',
+        model: 'A6',
+        image: '/static/img/cars/a6/1/1.jpg',
+        url: '/cars/business/a6',
+        price: 1500,
+        mintime: 2,
+        runprice: 35,
+    },
+
     //-- Catalog pages
 
     bus: {
@@ -200,7 +220,7 @@ export default {
 
     limousine: {
         model: 'Лимузины',
-        price: 2000,
+        price: 3000,
     }
 
 };
