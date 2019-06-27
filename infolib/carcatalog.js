@@ -8,7 +8,8 @@ export default [
         { alias: 'camry', name: 'Toyota Camry' },
         { alias: 'bmw7', name: 'BMW 7 series' },
         { alias: 'eclass', name: 'Mercedes Benz E-class' },
-
+        { alias: 'a6', name: 'Audi A6' },
+        { alias: 'm6', name: 'Mazda 6' },
         { alias: 'optima', name: 'KIA Optima' },
     ]},
     { alias: 'minivan', name: 'Минивэны', sub: [

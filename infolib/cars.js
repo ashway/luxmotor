@@ -49,6 +49,14 @@ export default {
         { photos: 8 },
     ],
 
+    a6: [
+        { photos: 4 },
+    ],
+
+    m6: [
+        { photos: 7 },
+    ],
+
     retro: [
         { alias: 'fordthunderbird', photos: 1},
         { alias: 'plymouthfury', photos: 2},
