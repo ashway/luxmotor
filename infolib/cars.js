@@ -50,7 +50,7 @@ export default {
     ],
 
     a6: [
-        { photos: 4 },
+        { photos: 3 },
     ],
 
     m6: [

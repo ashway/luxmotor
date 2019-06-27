@@ -568,9 +568,11 @@ a { text-decoration: none; color: #303030; }
   @include margin-between-horizontal(0);
   flex-wrap: wrap;
   .we-are-best {
+    display: block;
     text-align: center;
     width: 50%;
     margin-bottom: 20px;
+    cursor: pointer;
     &>.icon {
       display: inline-block;
       width: 100px;

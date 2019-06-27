@@ -2,6 +2,7 @@ import Header from '../components/header.jsx';
 import Footer from '../components/footer.jsx';
 import Services from '../components/services.jsx';
 import CarModel from '../components/carmodel.jsx';
+import Link from 'next/link';
 import InnerPageOrderForm from '../components/innerPageOrderForm.jsx';
 import _ from 'lodash';
 import "../scss/style.scss"
@@ -51,9 +52,9 @@ export default () => {
 
                     <div className="flex-block space-between">
                         <div className="h-menu">
-                            <div><a href="/cars/premium/w222" className="button">Парк автомобилей</a></div>
-                            <div><a href="/terms" className="button">Условия аренды</a></div>
-                            <div><a href="/contact" className="button">Контакты</a></div>
+                            <div><Link href="/cars/premium/w222"><a className="button">Парк автомобилей</a></Link></div>
+                            <div><Link href="/terms"><a className="button">Условия аренды</a></Link></div>
+                            <div><Link href="/contact"><a className="button">Контакты</a></Link></div>
                         </div>
 
                         <InnerPageOrderForm type="index-page"/>
@@ -66,39 +67,48 @@ export default () => {
 
                 <div className="we-are-best-container show-from-tablet">
 
-                    <div className="we-are-best">
-                        <div className="icon" style={{ backgroundImage: 'url(/static/img/sclass.jpg)'}}/>
-                        <div>
-                            <div className="h3">Премиум-класс</div>
-                            <div className="h1">от <span className="bold blue">1200р</span><span className="h3"> в час</span></div>
-                        </div>
-                    </div>
+                    <Link href="/cars/premium/w221">
+                        <a className="we-are-best">
+                            <div className="icon" style={{ backgroundImage: 'url(/static/img/sclass.jpg)'}}/>
+                            <div>
+                                <div className="h3">Премиум-класс</div>
+                                <div className="h1">от <span className="bold blue">1800р</span><span className="h3"> в час</span></div>
+                            </div>
+                        </a>
+                    </Link>
 
-                    <div className="we-are-best">
-                        <div className="icon" style={{backgroundImage: 'url(/static/img/vclass.jpg)'}}/>
-                        <div>
-                            <div className="h3">Минивэны</div>
-                            <div className="h1">от <span className="bold blue">1300р</span><span className="h3"> в час</span></div>
-                        </div>
-                    </div>
+                    <Link href="/cars/microbus/sprinter">
+                        <a className="we-are-best">
+                            <div className="icon" style={{backgroundImage: 'url(/static/img/sprinter.jpg)'}}/>
+                            <div>
+                                <div className="h3">Микроавтобусы</div>
+                                <div className="h1">от <span className="bold blue">1200р</span><span className="h3"> в час</span></div>
+                            </div>
+                        </a>
+                    </Link>
 
-                    <div className="we-are-best">
-                        <div className="icon" style={{backgroundImage: 'url(/static/img/sprinter.jpg)'}}/>
-                        <div>
-                            <div className="h3">Микроавтобусы</div>
-                            <div className="h1">от <span className="bold blue">1200р</span><span className="h3"> в час</span></div>
-                        </div>
-                    </div>
+                    <Link href="/cars/minivan/starex">
+                        <a className="we-are-best">
+                            <div className="icon" style={{backgroundImage: 'url(/static/img/vclass.jpg)'}}/>
+                            <div>
+                                <div className="h3">Минивэны</div>
+                                <div className="h1">от <span className="bold blue">800р</span><span className="h3"> в час</span></div>
+                            </div>
+                        </a>
+                    </Link>
 
-                    <div className="we-are-best">
-                        <div className="icon" style={{backgroundImage: 'url(/static/img/eclass.jpg)'}}/>
-                        <div>
-                            <div className="h3">Бизнес-класс</div>
-                            <div className="h1">от <span className="bold blue">700р</span><span className="h3"> в час</span></div>
-                        </div>
-                    </div>
+                    <Link href="/cars/business/eclass">
+                        <a className="we-are-best">
+                            <div className="icon" style={{backgroundImage: 'url(/static/img/eclass.jpg)'}}/>
+                            <div>
+                                <div className="h3">Бизнес-класс</div>
+                                <div className="h1">от <span className="bold blue">700р</span><span className="h3"> в час</span></div>
+                            </div>
+                        </a>
+                    </Link>
 
                 </div>
+
                 <div className="first-text w100 mb60">
                     <h1 className="h1 mb30 bold">Аренда автомобиля с водителем</h1>
 
@@ -132,37 +142,45 @@ export default () => {
                 <div className="h1 bold tacenter mb40">Наши цены</div>
 
                 <div className=" we-are-best-container">
-                    <div className="we-are-best">
-                        <div className="icon" style={{ backgroundImage: 'url(/static/img/sclass.jpg)' }}/>
-                        <div>
-                            <div className="h3">Премиум-класс</div>
-                            <div className="h2">от <span className="bold blue">1200р</span><span className="h3"> в час</span></div>
-                        </div>
-                    </div>
+                    <Link href="/cars/premium/w221">
+                        <a className="we-are-best">
+                            <div className="icon" style={{ backgroundImage: 'url(/static/img/sclass.jpg)'}}/>
+                            <div>
+                                <div className="h3">Премиум-класс</div>
+                                <div className="h1">от <span className="bold blue">1800р</span><span className="h3"> в час</span></div>
+                            </div>
+                        </a>
+                    </Link>
 
-                    <div className="we-are-best">
-                        <div className="icon" style={{ backgroundImage: 'url(/static/img/vclass.jpg)' }}/>
-                        <div>
-                            <div className="h3">Минивэны</div>
-                            <div className="h2">от <span className="bold blue">1300р</span><span className="h3"> в час</span></div>
-                        </div>
-                    </div>
+                    <Link href="/cars/microbus/sprinter">
+                        <a className="we-are-best">
+                            <div className="icon" style={{backgroundImage: 'url(/static/img/sprinter.jpg)'}}/>
+                            <div>
+                                <div className="h3">Микроавтобусы</div>
+                                <div className="h1">от <span className="bold blue">1200р</span><span className="h3"> в час</span></div>
+                            </div>
+                        </a>
+                    </Link>
 
-                    <div className="we-are-best">
-                        <div className="icon" style={{ backgroundImage: 'url(/static/img/sprinter.jpg)' }}/>
-                        <div>
-                            <div className="h3">Микроавтобусы</div>
-                            <div className="h2">от <span className="bold blue">1200р</span><span className="h3"> в час</span></div>
-                        </div>
-                    </div>
+                    <Link href="/cars/minivan/starex">
+                        <a className="we-are-best">
+                            <div className="icon" style={{backgroundImage: 'url(/static/img/vclass.jpg)'}}/>
+                            <div>
+                                <div className="h3">Минивэны</div>
+                                <div className="h1">от <span className="bold blue">800р</span><span className="h3"> в час</span></div>
+                            </div>
+                        </a>
+                    </Link>
 
-                    <div className="we-are-best">
-                        <div className="icon" style={{ backgroundImage: 'url(/static/img/eclass.jpg)' }}/>
-                        <div>
-                            <div className="h3">Бизнес-класс</div>
-                            <div className="h2">от <span className="bold blue">700р</span><span className="h3"> в час</span></div>
-                        </div>
-                    </div>
+                    <Link href="/cars/business/eclass">
+                        <a className="we-are-best">
+                            <div className="icon" style={{backgroundImage: 'url(/static/img/eclass.jpg)'}}/>
+                            <div>
+                                <div className="h3">Бизнес-класс</div>
+                                <div className="h1">от <span className="bold blue">700р</span><span className="h3"> в час</span></div>
+                            </div>
+                        </a>
+                    </Link>
                 </div>
             </div>
 
