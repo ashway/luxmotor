@@ -1,4 +1,5 @@
 import "../scss/style.scss"
+import Link from 'next/link';
 
 export default () => {
     return (
@@ -10,9 +11,9 @@ export default () => {
                     <div>© 2019</div>
                 </div>
                 <div className="f-menu">
-                    <a href="/terms">Условия аренды</a>
-                    <a href="/cars/premium/w222">Парк автомобилей</a>
-                    <a href="/contact">Контакты</a>
+                    <Link href="/terms"><a>Условия аренды</a></Link>
+                    <Link href="/cars/premium/w222"><a>Парк автомобилей</a></Link>
+                    <Link href="/contact"><a>Контакты</a></Link>
                 </div>
             </div>
         </div>
