@@ -57,8 +57,8 @@ export default {
     bmw7: {
         mark: 'BMW',
         model: '7 series',
-        image: '/static/img/bmw5/1/1.jpg',
-        url: '/cars/business/bmw5',
+        image: '/static/img/cars/bmw7/1/1.jpg',
+        url: '/cars/business/bmw7',
         price: 1300,
         runprice: 35,
     },
@@ -137,6 +137,7 @@ export default {
         mark: 'KIA',
         model: 'Optima',
         image: '/static/img/cars/optima/1/1.jpg',
+        url: '/cars/business/optima',
         price: 800,
         runprice: 25,
     },
@@ -144,7 +145,8 @@ export default {
     starex: {
         mark: 'Hyundai',
         model: 'Starex',
-        image: '/static/img/car/1/1.jpg',
+        image: '/static/img/cars/starex/1/1.jpg',
+        url: '/cars/minivan/starex',
         price: 800,
         runprice: 25
     },

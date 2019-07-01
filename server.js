@@ -1,3 +1,5 @@
+
+const fs = require('fs');
 const fastify = require('fastify')({ logger: { level: 'error' } });
 const Next = require('next');
 const TelegramBot = require('node-telegram-bot-api');
@@ -16,7 +18,6 @@ fastify.register((fastify, opts, next) => {
     .prepare()
     .then(() => {
       if (dev) {
-
         fastify.get('/_next/*', (req, reply) => {
           return app.handleRequest(req.req, reply.res).then(() => {
             reply.sent = true
@@ -39,29 +40,29 @@ fastify.register((fastify, opts, next) => {
         reply.send({ result: true });
       });
 
-        fastify.get('/service/*', (req, reply) => {
-        return app.render(req.req, reply.res, '/service', req.query).then(() => {
-          reply.sent = true;
-        })
-        });
+      fastify.get('/service/*', (req, reply) => {
+      return app.render(req.req, reply.res, '/service', req.query).then(() => {
+        reply.sent = true;
+      })
+      });
 
-        fastify.get('/cars/*', (req, reply) => {
-        return app.render(req.req, reply.res, '/cars', req.query).then(() => {
-          reply.sent = true;
-        })
-        });
+      fastify.get('/cars/*', (req, reply) => {
+      return app.render(req.req, reply.res, '/cars', req.query).then(() => {
+        reply.sent = true;
+      })
+      });
 
-        fastify.get('/*', (req, reply) => {
-        return app.handleRequest(req.req, reply.res).then(() => {
-          reply.sent = true;
-        })
-        });
+      fastify.get('/*', (req, reply) => {
+      return app.handleRequest(req.req, reply.res).then(() => {
+        reply.sent = true;
+      })
+      });
 
-        fastify.setNotFoundHandler((request, reply) => {
-        return app.render404(request.req, reply.res).then(() => {
-          reply.sent = true;
-        })
-        });
+      fastify.setNotFoundHandler((request, reply) => {
+      return app.render404(request.req, reply.res).then(() => {
+        reply.sent = true;
+      })
+      });
 
       next()
     })
