@@ -13,7 +13,7 @@ export default {
         model: 'W221',
         image: '/static/img/cars/w221/2/3.jpg',
         url: '/cars/premium/w221',
-        price: 1800,
+        price: 1200,
         runprice: 35,
     },
 
