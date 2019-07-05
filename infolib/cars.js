@@ -20,7 +20,8 @@ export default {
     ],
 
     optima: [
-        { photos: 4 }
+        { photos: 4 },
+        { photos: 6 },
     ],
 
     eclass: [
