@@ -1,6 +1,7 @@
 import "../scss/style.scss"
 import axios from "axios";
 import React from "react";
+import InputMask from 'react-input-mask';
 
 class RequestFormInner extends React.Component {
 
@@ -38,8 +39,8 @@ class RequestFormInner extends React.Component {
             <div className={`h-form ${(this.state.isSent)?'hide':''}`}>
                 <div className="h2" style={{ textAlign: `left`}}>Заказать автомобиль</div>
                 <div className="h-fields">
-                    <div><input className={`fio-field text-field w100 ${(this.state.fioHasError)?'has-error':''}`} onChange={(e)=>this.handleChange(e, 'fio')} placeholder="ФИО" value={this.state.fio} /></div>
-                    <div><input className={`phone-field text-field w100 ${(this.state.phoneHasError)?'has-error':''}`} onChange={(e)=>this.handleChange(e, 'phone')} placeholder="Контактный телефон"  value={this.state.phone}/></div>
+                    <div><input className={`fio-field text-field w100 ${(this.state.fioHasError)?'has-error':''}`} onChange={(e)=>this.handleChange(e, 'fio')} placeholder="ФИО" value={this.state.fio} maxLength="40" /></div>
+                    <div><InputMask className={`phone-field text-field w100 ${(this.state.phoneHasError)?'has-error':''}`} {...this.props} mask="+7(999) 999 99 99" placeholder="Номер телефона" maskChar=" " onChange={(e)=>this.handleChange(e, 'phone')} placeholder="Контактный телефон"  value={this.state.phone}/></div>
                     <div><div className={`sendMailButton button ${(this.state.sending)?'processing':''}`} onClick={()=>this.sendRequest()} style={{ whiteSpace: `nowrap`}}>{(this.state.sending)?'Отправляю':'Оставить заявку'}</div></div>
                 </div>
             </div>
