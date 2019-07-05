@@ -80,7 +80,7 @@ class IndexPage extends React.Component {
                                     <div className="icon" style={{ backgroundImage: 'url(/static/img/sclass.jpg)'}}/>
                                     <div>
                                         <div className="h3">Премиум-класс</div>
-                                        <div className="h1">от <span className="bold blue">1800р</span><span className="h3"> в час</span></div>
+                                        <div className="h1">от <span className="bold blue">1200р</span><span className="h3"> в час</span></div>
                                     </div>
                                 </a>
                             </Link>
@@ -155,7 +155,7 @@ class IndexPage extends React.Component {
                                     <div className="icon" style={{ backgroundImage: 'url(/static/img/sclass.jpg)'}}/>
                                     <div>
                                         <div className="h3">Премиум-класс</div>
-                                        <div className="h1">от <span className="bold blue">1800р</span><span className="h3"> в час</span></div>
+                                        <div className="h1">от <span className="bold blue">1200р</span><span className="h3"> в час</span></div>
                                     </div>
                                 </a>
                             </Link>

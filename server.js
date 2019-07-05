@@ -1,6 +1,7 @@
 
 const fs = require('fs');
 const fastify = require('fastify')({ logger: { level: 'error' } });
+const moment = require('moment');
 const Next = require('next');
 const TelegramBot = require('node-telegram-bot-api');
 
@@ -31,7 +32,8 @@ fastify.register((fastify, opts, next) => {
         });
         let data = req.body;
         try {
-          await bot.sendMessage(-1001397757254, `${new Date().toLocaleString('ru')}\n${data.fio}\n<a href="tel:${data.phone}">${data.phone}</a>`, { parse_mode: 'HTML' });
+          let dt = moment().utc().utcOffset(5).format('DD.MM.YYYY HH:mm');
+          await bot.sendMessage(-1001397757254, `${dt}\n${data.fio}\n<a href="tel:${data.phone}">${data.phone}</a>`, { parse_mode: 'HTML' });
         } catch(err) {
           //console.log(err.code);
         }
