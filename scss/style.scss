@@ -67,6 +67,11 @@ a { text-decoration: none; color: #303030; }
   text-align: center;
 }
 
+.taright {
+  text-align: right;
+}
+
+
 .tajistify {
   text-align: justify;
 }
@@ -116,6 +121,8 @@ a { text-decoration: none; color: #303030; }
 .extrasmall-font {
   font-size: 14px;
 }
+
+.cursor { cursor: pointer }
 
 .blue { color: #008fd2; }
 .white { color: #ffffff; }
@@ -395,6 +402,10 @@ a { text-decoration: none; color: #303030; }
     background-color: lighten(#b0b0b0, 10%);
     box-shadow: 0 5px 0 0 darken(#b0b0b0, 10%);
   }
+
+  &.nowrap {
+    white-space: nowrap;
+  }
 }
 
 
@@ -499,8 +510,11 @@ a { text-decoration: none; color: #303030; }
     border: 3px solid #f15500;
   }
 
+  &.center-text { text-align: center }
+  &.full { width: 100%; }
   &.w100 { width: 100%; }
   &.w320px { width: 320px; }
+  &.big { font-size: 25px }
 }
 
 .h-form {
@@ -1014,6 +1028,49 @@ a { text-decoration: none; color: #303030; }
 
   @include respond-to(tablet) {
     border-radius: 30px;
+  }
+}
+
+.newdriver-form {
+  display: inline-block;
+  width: 100%;
+  max-width: 600px;
+  background-color: #f0f1f2;
+  border-radius: 15px;
+  padding: 25px;
+  @include margin-between(30px);
+
+  .form {
+    @include margin-between(20px);
+  }
+}
+
+.car-photos-loader {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 15px;
+  text-align: center;
+  border: 4px dotted #008fd2;
+  cursor: pointer;
+
+  .file-list {
+    margin-top: 20px;
+    text-align: left;
+    &>div {
+      display: inline-block;
+      width: 33.333%;
+      border: 5px solid transparent;
+      box-sizing: border-box;
+      &>div {
+        border-radius: 15px;
+        background-position: center center;
+        background-size: cover;
+        background-clip: padding-box;
+        width: 100%;
+        padding-top: 65%
+      }
+    }
+
   }
 }
 
