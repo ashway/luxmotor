@@ -95,20 +95,54 @@ class WorkWithUsPage extends React.Component {
 
                     <InnerPageHeader caption="Работа с нами" background="static/img/background/terms.jpg"/>
 
-                    <div className="content mb50minus terms-page">
+                    <div className="content mb50minus wwa-page">
 
                         <div className="inner-page-text show-from-tablet">
-
+                            <div className="h2 bold">Водитель! работай с нами</div>
+                            <div>Привет, хотим предложить сотрудничество с нами на выгоднях для тебя условиях</div>
+                            <div>Если заинтересовало, пожалуйста пройти 4 простых шага</div>
+                            <div className="h3 bold">Вливайся в нашу компанду</div>
                         </div>
 
-                        <div className="w100 mb60">
+                        <div className="inner-page-main-content w100 mb60">
 
+                            <div>
+                                <div>
+                                    <div className="h1 bold">1</div>
+                                    <div className="tajistify">Оцени свои машину! Наша компания представляет услуги аренды автомобилей с водителем представительского и бизнес классов, по этому нам интересны машины бизнес-класса <span className="bold">не старше 5 лет</span>, а так же машины представительского класса <span className="bold">не старше 10 лет</span>, если у тебя ретроавтомобиль, лимузин или внежорожник, желательно что бы он был в надежном техничском состояние и с приятных внешнем видом</div>
+                                </div>
+
+                                <div>
+                                    <div className="h1 bold">2</div>
+                                    <div className="tajistify">Хорошо помой свою машину - чистая и красивая машина, залог того что наши клиенты выберут именно её</div>
+                                </div>
+
+                                <div>
+                                    <div className="h1 bold">3</div>
+                                    <div className="tajistify">
+                                        <div>Выбери красивое место в городе, например, парковка у входной группы бизнес центра. И сделай несколько фотографий своей машины. Вот несколько примеров достойных фотографий, если получится сделать так же будет замечательно</div>
+                                        <div className="images">
+                                            <div><div style={{backgroundImage: `url(/static/img/cars/w222/2/1.jpg)`}}/></div>
+                                            <div><div style={{backgroundImage: `url(/static/img/cars/w222/2/3.jpg)`}}/></div>
+                                            <div><div style={{backgroundImage: `url(/static/img/cars/camry/6/2.jpg)`}}/></div>
+                                            <div><div style={{backgroundImage: `url(/static/img/cars/w222/2/4.jpg)`}}/></div>
+                                            <div><div style={{backgroundImage: `url(/static/img/cars/m6/1/2.jpg)`}}/></div>
+                                            <div><div style={{backgroundImage: `url(/static/img/cars/sprinter/2/4.jpg)`}}/></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div>
+                                    <div className="h1 bold">4</div>
+                                    <div className="tajistify">И наконец, заполни в анкете необходимые данные, загрузи фотографии машины и отправь нам. Мы обязательно позвоним и обсудим детали нашего сотрудничества</div>
+                                </div>
+                            </div>
 
                             <div className="newdriver-form mbtw20">
-
                                 {(!this.state.formSent)?<div>
                                     <div className="h2 bold">Анкета водителя</div>
-
                                     <div className="form">
                                         {(!this.state.isPhoneValid)?<div>Для начала давайте подтвердим ваш номер телефона</div>:null}
                                         <div className="flex-block"><InputMask className="text-field w100" {...this.props} mask="+7(999) 999 99 99" placeholder="Номер телефона" maskChar=" " />{(!this.state.isPhoneValidateSent)?<div className="button nowrap" onClick={()=>this.validatePhone()}>Подтвердить номер</div>:null}</div>
@@ -123,25 +157,22 @@ class WorkWithUsPage extends React.Component {
                                                 </div>}
                                         </div>
                                     </div>
-
                                     {(this.state.isPhoneValid)?<div className="form">
-                                        <div>Продолжим, укажите ваше ФИО и загрузите фотографии машин</div>
+                                        <div>Продолжим, укажите ваше ФИО, желаемую сумму гонорара за час аренды и загрузите фотографии машин</div>
                                         <div><input type="text" className="text-field w100" placeholder="Как к вам обращаться?"/></div>
+                                        <div className="flex-block fb-vcenter"><input type="text" className="text-field w100" placeholder="Желаемый гонорар"/><span className="nowrap">руб/час</span></div>
                                         <div className="h3">Фотографии автомобилей</div>
 
                                         <div>
                                             <div className="mb15">Пожалуйста никак не обрабатывайте фотографии.</div>
-                                            <div>Наши специалисты самостоятельно произведут <span className="bold">обработку фотографий</span> и так же <span className="bold">скроют автономера</span></div>
+                                            <div>Наши специалисты самостоятельно произведут <span className="bold">обработку фотографий</span>, а так же <span className="bold">скроют автономера</span></div>
                                         </div>
-
                                         <PhotoLoader/>
-
                                         <div className="taright"><div className="button" onClick={this.formSend.bind(this)}>Отправить</div></div>
                                     </div>:null}
                                 </div>:
                                 <div>
                                     <div className="h2">Спасибо за регистрацию в нашей компании</div>
-                                    <div>Наши специалисты обработают фотографии ваших машин, добавлят в каталог и свяжутся с вами для согласования дальнейших действий</div>
                                 </div>}
                             </div>
                         </div>

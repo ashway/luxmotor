@@ -447,6 +447,64 @@ a { text-decoration: none; color: #303030; }
   }
 }
 
+.wwa-page {
+
+  .inner-page-main-content {
+    &>div:first-child {
+      @include margin-between(40px);
+      margin-bottom: 40px;
+      & > div {
+        @include flex($justify: flex-start, $align: flex-start);
+        & > div:first-child {
+          display: inline-block;
+          height: 60px;
+          min-width: 60px;
+          margin-right: 20px;
+          background-color: #008fd2;
+          color: #ffffff;
+          border-radius: 50%;
+          text-align: center;
+          line-height: 59px;
+        }
+      }
+    }
+
+    .images {
+      margin: -5px;
+      margin-top: 25px;
+      &>div {
+        display: inline-block;
+        width: 33.333%;
+        border: 5px solid transparent;
+        background-clip: padding-box;
+        box-sizing: border-box;
+        &>div {
+          position: relative;
+          width: 100%;
+          padding-top: 65%;
+          background-position: center center;
+          background-size: cover;
+          background-repeat: no-repeat;
+          border-radius: 15px;
+        }
+      }
+    }
+  }
+
+  @include respond-to(tablet) {
+    margin-top: 40px;
+    @include flex($align: flex-start);
+    .inner-page-text {
+      @include margin-between(40px);
+      text-align: left;
+      min-width: 350px;
+      max-width: 350px;
+      margin-right: 60px;
+      margin-top: -60px;
+    }
+  }
+}
+
 .terms-page {
   @include respond-to(tablet) {
     margin-top: 40px;
@@ -1038,6 +1096,7 @@ a { text-decoration: none; color: #303030; }
   background-color: #f0f1f2;
   border-radius: 15px;
   padding: 25px;
+  margin-left: 80px;
   @include margin-between(30px);
 
   .form {
