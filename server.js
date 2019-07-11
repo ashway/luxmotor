@@ -4,6 +4,12 @@ const fastify = require('fastify')({ logger: { level: 'error' } });
 const moment = require('moment');
 const Next = require('next');
 const TelegramBot = require('node-telegram-bot-api');
+const _ = require('lodash');
+const concat = require('concat-stream');
+const pump = require('pump');
+const uuid = require('uuid/v1');
+
+fastify.register(require('fastify-multipart'));
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
@@ -12,6 +18,9 @@ fastify.register(require('fastify-cors'), {
   origin: '*',
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
 });
+
+const botTokenDev = '659727031:AAFZ_8AXLTu2bBSej7_2UN5ujjlVQPsLggk';
+const botToken = '556896286:AAH791dcePJHlImFEs3HYryHa8HDRljMyW4';
 
 fastify.register((fastify, opts, next) => {
   const app = Next({ dev });
@@ -26,8 +35,44 @@ fastify.register((fastify, opts, next) => {
         })
       }
 
+        fastify.post('/uploadUserImage', async(req, reply) => {
+            let fields = {files: []};
+
+            let tempDir = uuid();
+            fs.mkdirSync(`./uploadedCars/${tempDir}`);
+            const mp = req.multipart((field, file, filename) => {
+                fields.files.push(filename);
+                pump(file, fs.createWriteStream(`./uploadedCars/${tempDir}/${filename}`));
+            }, async function (err) {
+                if (err) {
+                    reply.send(err);
+                    return
+                }
+
+                fields.phone = fields.phone.replace(/\s+|\+|\(|\)/g, '');
+                let bot = new TelegramBot(botTokenDev, {
+                    polling: true
+                });
+
+                try {
+                    let mediaGroup = [];
+                    _.forEach(fields.files, file=>mediaGroup.push({ type: 'photo', media: `attach://./uploadedCars/${tempDir}/${file}`}));
+                    await bot.sendMediaGroup(-1001204370141, mediaGroup);
+                } catch(err) {
+                    console.log(err.code);
+                }
+
+                //-- Закончили получать форму
+                reply.code(200).send();
+            });
+
+            mp.on('field', (field, value)=>{
+                fields[field] = value;
+            });
+        });
+
       fastify.post('/api/sendRequest',  async(req, reply) => {
-        let bot = new TelegramBot('556896286:AAH791dcePJHlImFEs3HYryHa8HDRljMyW4', {
+        let bot = new TelegramBot(botToken, {
           polling: true
         });
         let data = req.body;

@@ -97,6 +97,7 @@ a { text-decoration: none; color: #303030; }
     line-height: 32px;
   }
 }
+
 .h2 {
   font-size: 20px; font-family: 'Roboto Slab', serif;
   margin-bottom: 20px;
@@ -113,6 +114,8 @@ a { text-decoration: none; color: #303030; }
   margin-bottom: 3px;
   @include respond-to(desktop) { font-size: 18px; }
 }
+
+.nomargin { margin: 0; }
 
 .small-font {
   font-size: 16px;
@@ -1104,10 +1107,28 @@ a { text-decoration: none; color: #303030; }
   }
 }
 
+.loading-process {
+  display: inline-block;
+  text-align: left;
+  &>div:last-child {
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #ffffff;
+    margin-top: 10px;
+    line-height: 10px;
+    &>div {
+      display: inline-block;
+      height: 20px;
+      background-color: #008fd2;
+    }
+  }
+
+}
+
 .car-photos-loader {
   background-color: #ffffff;
   border-radius: 15px;
-  padding: 15px;
+  padding: 25px;
   text-align: center;
   border: 4px dotted #008fd2;
   cursor: pointer;
@@ -1121,15 +1142,29 @@ a { text-decoration: none; color: #303030; }
       border: 5px solid transparent;
       box-sizing: border-box;
       &>div {
+        position: relative;
         border-radius: 15px;
         background-position: center center;
         background-size: cover;
         background-clip: padding-box;
         width: 100%;
-        padding-top: 65%
+        padding-top: 65%;
+
+        .cpl-remove {
+          position: absolute;
+          right: 5px;
+          top: 5px;
+          background-color: #ffffff;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          &:before { font-family:"icomoon"; content: '\e902'; display: block; text-align: center; line-height: 30px; color: #505050; font-size: 14px; }
+          &:hover {
+              top: 4px;
+          }
+        }
       }
     }
-
   }
 }
 

@@ -3,58 +3,31 @@ import Header from '../components/header.jsx';
 import Footer from '../components/footer.jsx';
 import InnerPageHeader from '../components/innerPageHeader.jsx';
 import InputMask from 'react-input-mask';
-import {useDropzone} from 'react-dropzone';
+import Dropzone from 'react-dropzone';
 import _ from 'lodash';
+import axios from 'axios';
 
 import "../scss/style.scss";
-
-function PhotoLoader(props) {
-    const [files, setFiles] = useState([]);
-    const {acceptedFiles, getRootProps, getInputProps} = useDropzone({
-        accept: 'image/*',
-        onDrop: acceptedFiles => {
-            setFiles(acceptedFiles.map(file => Object.assign(file, {
-                preview: URL.createObjectURL(file)
-            })));
-        }
-    });
-
-    const thumbs = acceptedFiles.map(file => (
-        <div key={file.name}><div style={{backgroundImage: `url(${file.preview})`}}/></div>
-    ));
-
-    useEffect(() => () => {
-        // Make sure to revoke the data uris to avoid memory leaks
-        files.forEach(file => URL.revokeObjectURL(file.preview));
-    }, [files]);
-
-    return (
-        <div className="container car-photos-loader">
-            <div {...getRootProps()}>
-                <input {...getInputProps()} />
-                <p>Скиньте в эту область фотографии или кликните чтобы открыть окно выбора</p>
-                {(thumbs && _.isArray(thumbs) && thumbs.length>0)?<div className="file-list">
-                    {thumbs}
-                </div>:null}
-            </div>
-        </div>
-    );
-}
 
 class WorkWithUsPage extends React.Component {
 
     state = {
         isPhoneValidateSent: false,
-        isPhoneValid: false,
+        isPhoneValid: true,
         resendTimer: 120,
         showTimer: true,
         files: [],
-        formSent: false
+        formSending: false,
+        formSent: false,
+        phone: '',
+        name: '',
+        price: '',
+        loadingPercent: 0
     };
 
     tickTimer = () => {
         let timer = this.state.resendTimer - 1;
-        if(timer==0) clearInterval(this.intervalHandle);
+        if(timer===0) clearInterval(this.intervalHandle);
         this.setState({ resendTimer: timer });
     };
 
@@ -80,8 +53,44 @@ class WorkWithUsPage extends React.Component {
         }
     };
 
-    formSend = () => {
+    formSend = async () => {
+        let formData = new FormData();
+        formData.append("phone", this.state.phone);
+        formData.append("name", this.state.name);
+        formData.append("price", this.state.price);
+        if(this.state.files && this.state.files.length>0) _.forEach(this.state.files, file=>formData.append("photos[]", file, file.name));
+        this.setState({ formSending: true });
+        await axios.post('/uploadUserImage', formData, {
+            onUploadProgress: (progressEvent) => {
+                this.setState({ loadingPercent: Math.round( (progressEvent.loaded * 100) / progressEvent.total ) });
+            }
+        });
         this.setState({ formSent: true });
+    };
+
+    onDropHandle = (acceptedFiles) => {
+        this.setState({files:  _.concat(this.state.files, acceptedFiles.map(file => Object.assign(file, {
+                preview: URL.createObjectURL(file)
+            })))});
+    };
+
+    removeFileHandle = (e, index) => {
+        e.stopPropagation();
+        let files = this.state.files;
+        files.splice(index, 1);
+        this.setState({ files });
+    };
+
+    handlePhone = (e) => {
+        this.setState({ phone: e.target.value });
+    };
+
+    handleName = (e) => {
+        this.setState({ name: e.target.value });
+    };
+
+    handlePrice = (e) => {
+        this.setState({ price: e.target.value });
     };
 
     render() {
@@ -145,7 +154,7 @@ class WorkWithUsPage extends React.Component {
                                     <div className="h2 bold">Анкета водителя</div>
                                     <div className="form">
                                         {(!this.state.isPhoneValid)?<div>Для начала давайте подтвердим ваш номер телефона</div>:null}
-                                        <div className="flex-block"><InputMask className="text-field w100" {...this.props} mask="+7(999) 999 99 99" placeholder="Номер телефона" maskChar=" " />{(!this.state.isPhoneValidateSent)?<div className="button nowrap" onClick={()=>this.validatePhone()}>Подтвердить номер</div>:null}</div>
+                                        <div className="flex-block"><InputMask className="text-field w100" {...this.props} mask="+7(999) 999 99 99" placeholder="Номер телефона" maskChar=" " value={this.state.phone} onChange={this.handlePhone.bind(this)} />{(!this.state.isPhoneValidateSent)?<div className="button nowrap" onClick={()=>this.validatePhone()}>Подтвердить номер</div>:null}</div>
                                         <div>
                                             {(!this.state.isPhoneValidateSent || this.state.isPhoneValid)?null:
                                                 <div>
@@ -159,20 +168,41 @@ class WorkWithUsPage extends React.Component {
                                     </div>
                                     {(this.state.isPhoneValid)?<div className="form">
                                         <div>Продолжим, укажите ваше ФИО, желаемую сумму гонорара за час аренды и загрузите фотографии машин</div>
-                                        <div><input type="text" className="text-field w100" placeholder="Как к вам обращаться?"/></div>
-                                        <div className="flex-block fb-vcenter"><input type="text" className="text-field w100" placeholder="Желаемый гонорар"/><span className="nowrap">руб/час</span></div>
+                                        <div><input type="text" className="text-field w100" value={this.state.name} onChange={this.handleName.bind(this)} placeholder="Как к вам обращаться?"/></div>
+                                        <div className="flex-block fb-vcenter"><input type="text" className="text-field w100"  value={this.state.price} onChange={this.handlePrice.bind(this)} placeholder="Желаемый гонорар"/><span className="nowrap">руб/час</span></div>
                                         <div className="h3">Фотографии автомобилей</div>
 
                                         <div>
                                             <div className="mb15">Пожалуйста никак не обрабатывайте фотографии.</div>
                                             <div>Наши специалисты самостоятельно произведут <span className="bold">обработку фотографий</span>, а так же <span className="bold">скроют автономера</span></div>
                                         </div>
-                                        <PhotoLoader/>
-                                        <div className="taright"><div className="button" onClick={this.formSend.bind(this)}>Отправить</div></div>
+
+                                        <div className="container car-photos-loader">
+                                            <Dropzone onDrop={this.onDropHandle}>
+                                                {({getRootProps, getInputProps}) => (
+                                                <div {...getRootProps()}>
+                                                    <input {...getInputProps()} />
+                                                    <p>Скиньте в эту область фотографии или кликните чтобы открыть окно выбора</p>
+                                                    {(this.state.files.length>0)?<div className="file-list">
+                                                        {_.map(this.state.files, (file, index) => (
+                                                            <div key={file.name}><div style={{backgroundImage: `url(${file.preview})`}}><div className="cpl-remove" onClick={(e)=>this.removeFileHandle(e, index)} /></div></div>
+                                                        ))}
+                                                    </div>:null}
+                                                </div>)}
+                                            </Dropzone>
+                                        </div>
+                                        <div className="taright">
+                                            {(!this.state.formSending)?<div className="button" onClick={this.formSend.bind(this)}>Отправить</div>:
+                                                <div className="loading-process">
+                                                    <div>Идет загрузка фотографий</div>
+                                                    <div><div style={{ width: `${this.state.loadingPercent}%`}}/></div>
+                                                </div>}
+
+                                        </div>
                                     </div>:null}
                                 </div>:
                                 <div>
-                                    <div className="h2">Спасибо за регистрацию в нашей компании</div>
+                                    <div className="h2 nomargin">Спасибо за регистрацию в нашей компании</div>
                                 </div>}
                             </div>
                         </div>
