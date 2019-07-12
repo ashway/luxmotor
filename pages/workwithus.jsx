@@ -12,7 +12,7 @@ import "../scss/style.scss";
 class WorkWithUsPage extends React.Component {
 
     state = {
-        isPhoneValidateSent: false,
+        isPhoneValidateSent: true,
         isPhoneValid: true,
         resendTimer: 120,
         showTimer: true,
@@ -60,7 +60,7 @@ class WorkWithUsPage extends React.Component {
         formData.append("price", this.state.price);
         if(this.state.files && this.state.files.length>0) _.forEach(this.state.files, file=>formData.append("photos[]", file, file.name));
         this.setState({ formSending: true });
-        await axios.post('/uploadUserImage', formData, {
+        await axios.post('https://dev.lux-motor.ru/api/uploadUserImage', formData, {
             onUploadProgress: (progressEvent) => {
                 this.setState({ loadingPercent: Math.round( (progressEvent.loaded * 100) / progressEvent.total ) });
             }
@@ -167,7 +167,7 @@ class WorkWithUsPage extends React.Component {
                                         </div>
                                     </div>
                                     {(this.state.isPhoneValid)?<div className="form">
-                                        <div>Продолжим, укажите ваше ФИО, желаемую сумму гонорара за час аренды и загрузите фотографии машин</div>
+                                        {/*<div>Продолжим, укажите ваше ФИО, желаемую сумму гонорара за час аренды и загрузите фотографии машин</div>*/}
                                         <div><input type="text" className="text-field w100" value={this.state.name} onChange={this.handleName.bind(this)} placeholder="Как к вам обращаться?"/></div>
                                         <div className="flex-block fb-vcenter"><input type="text" className="text-field w100"  value={this.state.price} onChange={this.handlePrice.bind(this)} placeholder="Желаемый гонорар"/><span className="nowrap">руб/час</span></div>
                                         <div className="h3">Фотографии автомобилей</div>
