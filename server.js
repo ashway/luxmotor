@@ -29,7 +29,7 @@ fastify.register(require('fastify-cors'), {
 const botTokenDev = '659727031:AAFZ_8AXLTu2bBSej7_2UN5ujjlVQPsLggk';
 const botToken = '556896286:AAH791dcePJHlImFEs3HYryHa8HDRljMyW4';
 
-let bot = new Telegraf(botTokenDev, { telegram: { agent: socksAgent } });
+let bot = new Telegraf(botTokenDev/*, { telegram: { agent: socksAgent } }*/);
 
 fastify.register((fastify, opts, next) => {
   const app = Next({ dev });
