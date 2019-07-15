@@ -134,8 +134,8 @@ class WorkWithUsPage extends React.Component {
 
                     <div className="content mb50minus wwa-page">
 
-                        <div className="inner-page-text show-from-tablet">
-                            <div className="h2 bold">Водитель! работай с нами</div>
+                        <div className="inner-page-text">
+                            <div className="h2 bold mb40">Водитель! работай с нами</div>
                             <div>Привет, хотим предложить сотрудничество с нами на выгоднях для тебя условиях</div>
                             <div>Если заинтересовало, пожалуйста пройти 4 простых шага</div>
                             <div className="h3 bold">Вливайся в нашу компанду</div>

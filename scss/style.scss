@@ -460,7 +460,6 @@ a { text-decoration: none; color: #303030; }
       @include margin-between(40px);
       margin-bottom: 40px;
       & > div {
-        @include flex($justify: flex-start, $align: flex-start);
         & > div:first-child {
           display: inline-block;
           height: 60px;
@@ -471,6 +470,16 @@ a { text-decoration: none; color: #303030; }
           border-radius: 50%;
           text-align: center;
           line-height: 59px;
+          margin-left: 50%;
+          transform: translateX(-50%);
+        }
+
+        @include respond-to(tablet) {
+          @include flex($justify: flex-start, $align: flex-start);
+          & > div:first-child {
+            margin-left: 0;
+            transform: translateX(0);
+          }
         }
       }
     }
@@ -1097,16 +1106,18 @@ a { text-decoration: none; color: #303030; }
 
 .newdriver-form {
   display: inline-block;
-  width: 100%;
   max-width: 600px;
   background-color: #f0f1f2;
   border-radius: 15px;
   padding: 25px;
-  margin-left: 80px;
   @include margin-between(30px);
 
   .form {
     @include margin-between(20px);
+  }
+
+  @include respond-to(tablet) {
+    margin-left: 80px;
   }
 }
 
