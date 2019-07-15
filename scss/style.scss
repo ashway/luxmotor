@@ -67,6 +67,11 @@ a { text-decoration: none; color: #303030; }
   text-align: center;
 }
 
+.taright {
+  text-align: right;
+}
+
+
 .tajistify {
   text-align: justify;
 }
@@ -92,6 +97,7 @@ a { text-decoration: none; color: #303030; }
     line-height: 32px;
   }
 }
+
 .h2 {
   font-size: 20px; font-family: 'Roboto Slab', serif;
   margin-bottom: 20px;
@@ -109,6 +115,8 @@ a { text-decoration: none; color: #303030; }
   @include respond-to(desktop) { font-size: 18px; }
 }
 
+.nomargin { margin: 0; }
+
 .small-font {
   font-size: 16px;
 }
@@ -117,8 +125,13 @@ a { text-decoration: none; color: #303030; }
   font-size: 14px;
 }
 
+.cursor { cursor: pointer }
+
 .blue { color: #008fd2; }
 .white { color: #ffffff; }
+.red {
+  color: #CE0606;
+}
 
 .header {
   position: relative;
@@ -395,6 +408,10 @@ a { text-decoration: none; color: #303030; }
     background-color: lighten(#b0b0b0, 10%);
     box-shadow: 0 5px 0 0 darken(#b0b0b0, 10%);
   }
+
+  &.nowrap {
+    white-space: nowrap;
+  }
 }
 
 
@@ -433,6 +450,64 @@ a { text-decoration: none; color: #303030; }
 .hide-after-mobile {
   @include respond-to(tablet){
     display: none !important;
+  }
+}
+
+.wwa-page {
+
+  .inner-page-main-content {
+    &>div:first-child {
+      @include margin-between(40px);
+      margin-bottom: 40px;
+      & > div {
+        @include flex($justify: flex-start, $align: flex-start);
+        & > div:first-child {
+          display: inline-block;
+          height: 60px;
+          min-width: 60px;
+          margin-right: 20px;
+          background-color: #008fd2;
+          color: #ffffff;
+          border-radius: 50%;
+          text-align: center;
+          line-height: 59px;
+        }
+      }
+    }
+
+    .images {
+      margin: -5px;
+      margin-top: 25px;
+      &>div {
+        display: inline-block;
+        width: 33.333%;
+        border: 5px solid transparent;
+        background-clip: padding-box;
+        box-sizing: border-box;
+        &>div {
+          position: relative;
+          width: 100%;
+          padding-top: 65%;
+          background-position: center center;
+          background-size: cover;
+          background-repeat: no-repeat;
+          border-radius: 15px;
+        }
+      }
+    }
+  }
+
+  @include respond-to(tablet) {
+    margin-top: 40px;
+    @include flex($align: flex-start);
+    .inner-page-text {
+      @include margin-between(40px);
+      text-align: left;
+      min-width: 350px;
+      max-width: 350px;
+      margin-right: 60px;
+      margin-top: -60px;
+    }
   }
 }
 
@@ -499,8 +574,11 @@ a { text-decoration: none; color: #303030; }
     border: 3px solid #f15500;
   }
 
+  &.center-text { text-align: center }
+  &.full { width: 100%; }
   &.w100 { width: 100%; }
   &.w320px { width: 320px; }
+  &.big { font-size: 25px }
 }
 
 .h-form {
@@ -1014,6 +1092,82 @@ a { text-decoration: none; color: #303030; }
 
   @include respond-to(tablet) {
     border-radius: 30px;
+  }
+}
+
+.newdriver-form {
+  display: inline-block;
+  width: 100%;
+  max-width: 600px;
+  background-color: #f0f1f2;
+  border-radius: 15px;
+  padding: 25px;
+  margin-left: 80px;
+  @include margin-between(30px);
+
+  .form {
+    @include margin-between(20px);
+  }
+}
+
+.loading-process {
+  display: inline-block;
+  text-align: left;
+  &>div:last-child {
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #ffffff;
+    margin-top: 10px;
+    line-height: 10px;
+    &>div {
+      display: inline-block;
+      height: 20px;
+      background-color: #008fd2;
+    }
+  }
+
+}
+
+.car-photos-loader {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+  border: 4px dotted #008fd2;
+  cursor: pointer;
+
+  .file-list {
+    margin-top: 20px;
+    text-align: left;
+    &>div {
+      display: inline-block;
+      width: 33.333%;
+      border: 5px solid transparent;
+      box-sizing: border-box;
+      &>div {
+        position: relative;
+        border-radius: 15px;
+        background-position: center center;
+        background-size: cover;
+        background-clip: padding-box;
+        width: 100%;
+        padding-top: 65%;
+
+        .cpl-remove {
+          position: absolute;
+          right: 5px;
+          top: 5px;
+          background-color: #ffffff;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          &:before { font-family:"icomoon"; content: '\e902'; display: block; text-align: center; line-height: 30px; color: #505050; font-size: 14px; }
+          &:hover {
+              top: 4px;
+          }
+        }
+      }
+    }
   }
 }
 

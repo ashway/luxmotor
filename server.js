@@ -3,10 +3,24 @@ const fs = require('fs');
 const fastify = require('fastify')({ logger: { level: 'error' } });
 const moment = require('moment');
 const Next = require('next');
-const TelegramBot = require('node-telegram-bot-api');
+const Telegraf = require('telegraf');
+const _ = require('lodash');
+const pump = require('pump');
+const uuid = require('uuid/v1');
+
+fastify.register(require('fastify-multipart'));
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
+
+let selfURL = 'https://lux-motor.ru';
+let botToken = '556896286:AAH791dcePJHlImFEs3HYryHa8HDRljMyW4';
+let chatId = '-1001397757254';
+if(dev) {
+    selfURL = 'https://dev.lux-motor.ru';
+    botToken = '659727031:AAFZ_8AXLTu2bBSej7_2UN5ujjlVQPsLggk';
+    chatId = '-1001204370141';
+}
 
 fastify.register(require('fastify-cors'), {
   origin: '*',
@@ -26,16 +40,57 @@ fastify.register((fastify, opts, next) => {
         })
       }
 
-      fastify.post('/api/sendRequest',  async(req, reply) => {
-        let bot = new TelegramBot('556896286:AAH791dcePJHlImFEs3HYryHa8HDRljMyW4', {
-          polling: true
+        fastify.post('/api/uploadUserImage', async(req, reply) => {
+            let fields = {files: []};
+
+            let tempDir = uuid();
+            fs.mkdirSync(`./static/uploadImg/${tempDir}`);
+            const mp = req.multipart((field, file, filename) => {
+                fields.files.push(filename);
+                pump(file, fs.createWriteStream(`./static/uploadImg/${tempDir}/${filename}`));
+            }, async function (err) {
+                if (err) {
+                    reply.send(err);
+                    return
+                }
+                fields.phoneRaw = fields.phone.replace(/\s+|\+|\(|\)/g, '');
+                let bot = new Telegraf(botToken/*, { telegram: { agent: socksAgent } }*/);
+                try {
+                let dt = moment().utc().utcOffset(5);
+                await bot.telegram.sendMessage(chatId, `Зарегистрировался новый водитель!\n${dt.format('DD.MM.YYYY')}\n${dt.format('HH:mm')}\n${fields.name}\n<a href="tel:${fields.phoneRaw}">${fields.phone}</a>\nОжидаемый гонорар: ${fields.price} руб.`, { parse_mode: 'HTML' });
+                let mediaGroup = [];
+                _.forEach(fields.files, file=>{
+                    mediaGroup.push({
+                        'media': `${selfURL}/static/uploadImg/${tempDir}/${file}`,
+                        'type': 'photo'
+                    });
+                });
+                await bot.telegram.sendMediaGroup(chatId, mediaGroup);
+                //await bot.launch();
+                //bot.stop();
+                //-- Закончили получать форму
+                } catch(err) {
+                    console.log(err);
+                }
+                reply.code(200).send();
+            });
+
+            mp.on('field', (field, value)=>{
+                fields[field] = value;
+            });
         });
+
+      fastify.post('/api/sendRequest',  async(req, reply) => {
         let data = req.body;
+        let bot = new Telegraf(botToken/*, { telegram: { agent: socksAgent } }*/);
         try {
-          let dt = moment().utc().utcOffset(5).format('DD.MM.YYYY HH:mm');
-          await bot.sendMessage(-1001397757254, `${dt}\n${data.fio}\n<a href="tel:${data.phone}">${data.phone}</a>`, { parse_mode: 'HTML' });
+          data.phoneRaw = data.phone.replace(/\s+|\+|\(|\)/g, '');
+
+          let dt = moment().utc().utcOffset(5);
+          await bot.telegram.sendMessage(chatId, `Заявка с сайта!\n${dt.format('DD.MM.YYYY')}\n${dt.format('HH:mm')}\n${data.fio}\n<a href="tel:${data.phoneRaw}">${data.phone}</a>`, { parse_mode: 'HTML' });
+          //await bot.launch();
         } catch(err) {
-          //console.log(err.code);
+          console.log(err.code);
         }
 
         reply.header('Content-Type', 'application/json').code(200);
