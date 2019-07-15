@@ -63,8 +63,9 @@ fastify.register((fastify, opts, next) => {
                 }
                 fields.phoneRaw = fields.phone.replace(/\s+|\+|\(|\)/g, '');
                 let bot = new Telegraf(botToken/*, { telegram: { agent: socksAgent } }*/);
-                //try {
-                bot.telegram.sendMessage(chatId, `${moment().utc().utcOffset(5).format('HH:mm DD.MM.YYYY')}\nЗарегистрировался новый водитель!\n${fields.name}\n<a href="tel:${fields.phoneRaw}">${fields.phone}</a>\nОжидаемый гонорар: ${fields.price} руб.`, { parse_mode: 'HTML' });
+                try {
+                let dt = moment().utc().utcOffset(5);
+                bot.telegram.sendMessage(chatId, `${dt.format('DD.MM.YYYY')}\n${dt.format('HH:mm')}\nЗарегистрировался новый водитель!\n${fields.name}\n<a href="tel:${fields.phoneRaw}">${fields.phone}</a>\nОжидаемый гонорар: ${fields.price} руб.`, { parse_mode: 'HTML' });
                 let mediaGroup = [];
                 _.forEach(fields.files, file=>{
                     mediaGroup.push({
@@ -75,9 +76,9 @@ fastify.register((fastify, opts, next) => {
                 bot.telegram.sendMediaGroup(chatId, mediaGroup);
                 bot.launch();
                 //-- Закончили получать форму
-                /*} catch(err) {
+                } catch(err) {
                     console.log(err);
-                }*/
+                }
                 reply.code(200).send();
             });
 
@@ -91,7 +92,9 @@ fastify.register((fastify, opts, next) => {
         let bot = new Telegraf(botToken/*, { telegram: { agent: socksAgent } }*/);
         try {
           data.phoneRaw = data.phone.replace(/\s+|\+|\(|\)/g, '');
-          bot.telegram.sendMessage(chatId, `${moment().utc().utcOffset(5).format('HH:mm DD.MM.YYYY')}\n${data.fio}\n<a href="tel:${data.phoneRaw}">${data.phone}</a>`, { parse_mode: 'HTML' });
+
+          let dt = moment().utc().utcOffset(5);
+          bot.telegram.sendMessage(chatId, `${dt.format('DD.MM.YYYY')}\n${dt.format('HH:mm')}\n${data.fio}\n<a href="tel:${data.phoneRaw}">${data.phone}</a>`, { parse_mode: 'HTML' });
           bot.launch();
         } catch(err) {
           console.log(err.code);
