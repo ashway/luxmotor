@@ -20,9 +20,13 @@ class WorkWithUsPage extends React.Component {
         formSending: false,
         formSent: false,
         phone: '',
+        invalidPhone: false,
         name: '',
+        invalidName: false,
         price: '',
-        loadingPercent: 0
+        invalidPrice: false,
+        loadingPercent: 0,
+        hasNoImages: false
     };
 
     tickTimer = () => {
@@ -46,7 +50,6 @@ class WorkWithUsPage extends React.Component {
     };
 
     handleCode = (e) => {
-
         if(e.target.value.length===4) {
             clearInterval(this.intervalHandle);
             this.setState({ isPhoneValid: true, showTimer: false });
@@ -54,22 +57,47 @@ class WorkWithUsPage extends React.Component {
     };
 
     formSend = async () => {
-        let formData = new FormData();
-        formData.append("phone", this.state.phone);
-        formData.append("name", this.state.name);
-        formData.append("price", this.state.price);
-        if(this.state.files && this.state.files.length>0) _.forEach(this.state.files, file=>formData.append("photos[]", file, file.name));
-        this.setState({ formSending: true });
-        await axios.post('https://dev.lux-motor.ru/api/uploadUserImage', formData, {
-            onUploadProgress: (progressEvent) => {
-                this.setState({ loadingPercent: Math.round( (progressEvent.loaded * 100) / progressEvent.total ) });
-            }
-        });
-        this.setState({ formSent: true });
+
+        let canSend = true;
+
+        if(!this.state.phone.length) {
+            this.setState({ invalidPhone: true  });
+            canSend = false;
+        }
+
+        if(!this.state.name.length) {
+            this.setState({ invalidName: true  });
+            canSend = false;
+        }
+
+        if(!this.state.price.length) {
+            this.setState({ invalidPrice: true  });
+            canSend = false;
+        }
+
+        if(!this.state.files.length) {
+            this.setState({ hasNoImages: true  });
+            canSend = false;
+        }
+
+        if(canSend) {
+            let formData = new FormData();
+            formData.append("phone", this.state.phone);
+            formData.append("name", this.state.name);
+            formData.append("price", this.state.price);
+            if(this.state.files && this.state.files.length>0) _.forEach(this.state.files, file=>formData.append("photos[]", file, file.name));
+            this.setState({ formSending: true });
+            await axios.post('https://dev.lux-motor.ru/api/uploadUserImage', formData, {
+                onUploadProgress: (progressEvent) => {
+                    this.setState({ loadingPercent: Math.round( (progressEvent.loaded * 100) / progressEvent.total ) });
+                }
+            });
+            this.setState({ formSent: true });
+        }
     };
 
     onDropHandle = (acceptedFiles) => {
-        this.setState({files:  _.concat(this.state.files, acceptedFiles.map(file => Object.assign(file, {
+        this.setState({hasNoImages: false, files:  _.concat(this.state.files, acceptedFiles.map(file => Object.assign(file, {
                 preview: URL.createObjectURL(file)
             })))});
     };
@@ -82,15 +110,15 @@ class WorkWithUsPage extends React.Component {
     };
 
     handlePhone = (e) => {
-        this.setState({ phone: e.target.value });
+        this.setState({ phone: e.target.value, invalidPhone: false });
     };
 
     handleName = (e) => {
-        this.setState({ name: e.target.value });
+        this.setState({ name: e.target.value, invalidName: false });
     };
 
     handlePrice = (e) => {
-        this.setState({ price: e.target.value });
+        this.setState({ price: e.target.value, invalidPrice: false });
     };
 
     render() {
@@ -154,7 +182,7 @@ class WorkWithUsPage extends React.Component {
                                     <div className="h2 bold">Анкета водителя</div>
                                     <div className="form">
                                         {(!this.state.isPhoneValid)?<div>Для начала давайте подтвердим ваш номер телефона</div>:null}
-                                        <div className="flex-block"><InputMask className="text-field w100" {...this.props} mask="+7(999) 999 99 99" placeholder="Номер телефона" maskChar=" " value={this.state.phone} onChange={this.handlePhone.bind(this)} />{(!this.state.isPhoneValidateSent)?<div className="button nowrap" onClick={()=>this.validatePhone()}>Подтвердить номер</div>:null}</div>
+                                        <div className="flex-block"><InputMask className={`text-field w100 ${(this.state.invalidPhone) ? 'has-error' : ''}`} {...this.props} mask="+7(999) 999 99 99" placeholder="Номер телефона" maskChar=" " value={this.state.phone} onChange={this.handlePhone.bind(this)} />{(!this.state.isPhoneValidateSent)?<div className="button nowrap" onClick={()=>this.validatePhone()}>Подтвердить номер</div>:null}</div>
                                         <div>
                                             {(!this.state.isPhoneValidateSent || this.state.isPhoneValid)?null:
                                                 <div>
@@ -168,8 +196,8 @@ class WorkWithUsPage extends React.Component {
                                     </div>
                                     {(this.state.isPhoneValid)?<div className="form">
                                         {/*<div>Продолжим, укажите ваше ФИО, желаемую сумму гонорара за час аренды и загрузите фотографии машин</div>*/}
-                                        <div><input type="text" className="text-field w100" value={this.state.name} onChange={this.handleName.bind(this)} placeholder="Как к вам обращаться?"/></div>
-                                        <div className="flex-block fb-vcenter"><input type="text" className="text-field w100"  value={this.state.price} onChange={this.handlePrice.bind(this)} placeholder="Желаемый гонорар"/><span className="nowrap">руб/час</span></div>
+                                        <div><input type="text" className={`text-field w100 ${(this.state.invalidName) ? 'has-error' : ''}`} value={this.state.name} onChange={this.handleName.bind(this)} placeholder="Как к вам обращаться?"/></div>
+                                        <div className="flex-block fb-vcenter"><input type="text" className={`text-field w100 ${(this.state.invalidName) ? 'has-error' : ''}`} value={this.state.price} onChange={this.handlePrice.bind(this)} placeholder="Желаемый гонорар"/><span className="nowrap">руб/час</span></div>
                                         <div className="h3">Фотографии автомобилей</div>
 
                                         <div>
@@ -191,6 +219,9 @@ class WorkWithUsPage extends React.Component {
                                                 </div>)}
                                             </Dropzone>
                                         </div>
+
+                                        { (this.state.hasNoImages)?<div className="red">Нужно добавить хотя бы одну фотографию машей машины</div>:null }
+
                                         <div className="taright">
                                             {(!this.state.formSending)?<div className="button" onClick={this.formSend.bind(this)}>Отправить</div>:
                                                 <div className="loading-process">

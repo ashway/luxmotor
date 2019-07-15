@@ -58,9 +58,10 @@ fastify.register((fastify, opts, next) => {
                     return
                 }
 
-                fields.phone = fields.phone.replace(/\s+|\+|\(|\)/g, '');
+                fields.phoneRaw = fields.phone.replace(/\s+|\+|\(|\)/g, '');
+                fields.phone = fields.phone.replace(/\s+/g, '-');
                 //try {
-                bot.telegram.sendMessage(-1001204370141, `Зарегистрировался новый водитель!\n${fields.name}\n${fields.phone}\nОжидаемый гонорар: ${fields.price} руб.`, { parse_mode: 'HTML' });
+                bot.telegram.sendMessage(-1001204370141, `Зарегистрировался новый водитель!\n${fields.name}\n<a href="tel:${fields.phoneRaw}">${fields.phone}\nОжидаемый гонорар: ${fields.price} руб.`, { parse_mode: 'HTML' });
                 let mediaGroup = [];
                 _.forEach(fields.files, file=>{
                     mediaGroup.push({
@@ -86,7 +87,9 @@ fastify.register((fastify, opts, next) => {
         let data = req.body;
         try {
           let dt = moment().utc().utcOffset(5).format('DD.MM.YYYY HH:mm');
-          bot.telegram.sendMessage(-1001397757254, `${dt}\n${data.fio}\n<a href="tel:${data.phone}">${data.phone}</a>`, { parse_mode: 'HTML' });
+          data.phoneRaw = fields.phone.replace(/\s+|\+|\(|\)/g, '');
+          data.phone = fields.phone.replace(/\s+/g, '-');
+          bot.telegram.sendMessage(-1001397757254, `${dt}\n${data.fio}\n<a href="tel:${data.phoneRaw}">${data.phone}</a>`, { parse_mode: 'HTML' });
           bot.launch();
         } catch(err) {
           console.log(err.code);
