@@ -65,7 +65,7 @@ fastify.register((fastify, opts, next) => {
                 let bot = new Telegraf(botToken/*, { telegram: { agent: socksAgent } }*/);
                 try {
                 let dt = moment().utc().utcOffset(5);
-                bot.telegram.sendMessage(chatId, `${dt.format('DD.MM.YYYY')}\n${dt.format('HH:mm')}\nЗарегистрировался новый водитель!\n${fields.name}\n<a href="tel:${fields.phoneRaw}">${fields.phone}</a>\nОжидаемый гонорар: ${fields.price} руб.`, { parse_mode: 'HTML' });
+                await bot.telegram.sendMessage(chatId, `${dt.format('DD.MM.YYYY')}\n${dt.format('HH:mm')}\nЗарегистрировался новый водитель!\n${fields.name}\n<a href="tel:${fields.phoneRaw}">${fields.phone}</a>\nОжидаемый гонорар: ${fields.price} руб.`, { parse_mode: 'HTML' });
                 let mediaGroup = [];
                 _.forEach(fields.files, file=>{
                     mediaGroup.push({
@@ -73,8 +73,9 @@ fastify.register((fastify, opts, next) => {
                         'type': 'photo'
                     });
                 });
-                bot.telegram.sendMediaGroup(chatId, mediaGroup);
-                bot.launch();
+                await bot.telegram.sendMediaGroup(chatId, mediaGroup);
+                //await bot.launch();
+                //bot.stop();
                 //-- Закончили получать форму
                 } catch(err) {
                     console.log(err);
@@ -94,8 +95,8 @@ fastify.register((fastify, opts, next) => {
           data.phoneRaw = data.phone.replace(/\s+|\+|\(|\)/g, '');
 
           let dt = moment().utc().utcOffset(5);
-          bot.telegram.sendMessage(chatId, `${dt.format('DD.MM.YYYY')}\n${dt.format('HH:mm')}\n${data.fio}\n<a href="tel:${data.phoneRaw}">${data.phone}</a>`, { parse_mode: 'HTML' });
-          bot.launch();
+          await bot.telegram.sendMessage(chatId, `${dt.format('DD.MM.YYYY')}\n${dt.format('HH:mm')}\n${data.fio}\n<a href="tel:${data.phoneRaw}">${data.phone}</a>`, { parse_mode: 'HTML' });
+          //await bot.launch();
         } catch(err) {
           console.log(err.code);
         }
