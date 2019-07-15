@@ -3,8 +3,6 @@ import axios from "axios";
 import React from "react";
 import InputMask from 'react-input-mask';
 
-const apiUrl = 'https://dev.lux-motor.ru';
-
 class RequestFormInner extends React.Component {
 
     state = {
@@ -30,7 +28,7 @@ class RequestFormInner extends React.Component {
 
         if(this.state.fio && this.state.phone) {
             this.setState({sending: true });
-            await axios.post(`${apiUrl}/api/sendRequest`, { fio: this.state.fio, phone: this.state.phone });
+            await axios.post(`/api/sendRequest`, { fio: this.state.fio, phone: this.state.phone });
             this.setState({ isSent: true });
         }
     }

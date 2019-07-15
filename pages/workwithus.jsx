@@ -8,7 +8,6 @@ import _ from 'lodash';
 import axios from 'axios';
 
 import "../scss/style.scss";
-const apiUrl = 'https://dev.lux-motor.ru';
 
 class WorkWithUsPage extends React.Component {
 
@@ -88,7 +87,7 @@ class WorkWithUsPage extends React.Component {
             formData.append("price", this.state.price);
             if(this.state.files && this.state.files.length>0) _.forEach(this.state.files, file=>formData.append("photos[]", file, file.name));
             this.setState({ formSending: true });
-            await axios.post(`${apiUrl}/api/uploadUserImage`, formData, {
+            await axios.post(`/api/uploadUserImage`, formData, {
                 onUploadProgress: (progressEvent) => {
                     this.setState({ loadingPercent: Math.round( (progressEvent.loaded * 100) / progressEvent.total ) });
                 }

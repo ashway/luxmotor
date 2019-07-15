@@ -8,14 +8,6 @@ const _ = require('lodash');
 const pump = require('pump');
 const uuid = require('uuid/v1');
 
-/*const SocksAgent = require('socks5-https-client/lib/Agent');
-const socksAgent = new SocksAgent({
-    socksHost: '51.79.54.137',
-    socksPort: '6900',
-    socksUsername: 'proxyuser',
-    socksPassword: 'proxy!pass'
-});*/
-
 fastify.register(require('fastify-multipart'));
 
 const port = parseInt(process.env.PORT, 10) || 3000;
