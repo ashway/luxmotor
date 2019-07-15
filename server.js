@@ -23,10 +23,11 @@ const dev = process.env.NODE_ENV !== 'production';
 
 let selfURL = 'https://lux-motor.ru';
 let botToken = '556896286:AAH791dcePJHlImFEs3HYryHa8HDRljMyW4';
-
+let chatId = '-1001397757254';
 if(dev) {
     selfURL = 'https://dev.lux-motor.ru';
     botToken = '659727031:AAFZ_8AXLTu2bBSej7_2UN5ujjlVQPsLggk';
+    let chatId = '-1001204370141';
 }
 
 fastify.register(require('fastify-cors'), {
@@ -64,7 +65,7 @@ fastify.register((fastify, opts, next) => {
                 fields.phoneRaw = fields.phone.replace(/\s+|\+|\(|\)/g, '');
                 let bot = new Telegraf(botToken/*, { telegram: { agent: socksAgent } }*/);
                 //try {
-                bot.telegram.sendMessage(-1001204370141, `${dt}\nЗарегистрировался новый водитель!\n${fields.name}\n<a href="tel:${fields.phoneRaw}">${fields.phone}\nОжидаемый гонорар: ${fields.price} руб.`, { parse_mode: 'HTML' });
+                bot.telegram.sendMessage(chatId, `${dt}\nЗарегистрировался новый водитель!\n${fields.name}\n<a href="tel:${fields.phoneRaw}">${fields.phone}\nОжидаемый гонорар: ${fields.price} руб.`, { parse_mode: 'HTML' });
                 let mediaGroup = [];
                 _.forEach(fields.files, file=>{
                     mediaGroup.push({
@@ -72,7 +73,7 @@ fastify.register((fastify, opts, next) => {
                         'type': 'photo'
                     });
                 });
-                bot.telegram.sendMediaGroup(-1001204370141, mediaGroup);
+                bot.telegram.sendMediaGroup(chatId, mediaGroup);
                 bot.launch();
                 //-- Закончили получать форму
                 /*} catch(err) {
@@ -92,7 +93,7 @@ fastify.register((fastify, opts, next) => {
         try {
           let dt = moment().utc().utcOffset(5).format('DD/MM/YYYY HH:mm');
           data.phoneRaw = fields.phone.replace(/\s+|\+|\(|\)/g, '');
-          bot.telegram.sendMessage(-1001397757254, `${dt}\n${data.fio}\n<a href="tel:${data.phoneRaw}">${data.phone}</a>`, { parse_mode: 'HTML' });
+          bot.telegram.sendMessage(chatId, `${dt}\n${data.fio}\n<a href="tel:${data.phoneRaw}">${data.phone}</a>`, { parse_mode: 'HTML' });
           bot.launch();
         } catch(err) {
           console.log(err.code);
