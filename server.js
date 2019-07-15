@@ -65,7 +65,7 @@ fastify.register((fastify, opts, next) => {
                 let bot = new Telegraf(botToken/*, { telegram: { agent: socksAgent } }*/);
                 try {
                 let dt = moment().utc().utcOffset(5);
-                await bot.telegram.sendMessage(chatId, `${dt.format('DD.MM.YYYY')}\n${dt.format('HH:mm')}\nЗарегистрировался новый водитель!\n${fields.name}\n<a href="tel:${fields.phoneRaw}">${fields.phone}</a>\nОжидаемый гонорар: ${fields.price} руб.`, { parse_mode: 'HTML' });
+                await bot.telegram.sendMessage(chatId, `Зарегистрировался новый водитель!\n${dt.format('DD.MM.YYYY')}\n${dt.format('HH:mm')}\n${fields.name}\n<a href="tel:${fields.phoneRaw}">${fields.phone}</a>\nОжидаемый гонорар: ${fields.price} руб.`, { parse_mode: 'HTML' });
                 let mediaGroup = [];
                 _.forEach(fields.files, file=>{
                     mediaGroup.push({
@@ -95,7 +95,7 @@ fastify.register((fastify, opts, next) => {
           data.phoneRaw = data.phone.replace(/\s+|\+|\(|\)/g, '');
 
           let dt = moment().utc().utcOffset(5);
-          await bot.telegram.sendMessage(chatId, `${dt.format('DD.MM.YYYY')}\n${dt.format('HH:mm')}\n${data.fio}\n<a href="tel:${data.phoneRaw}">${data.phone}</a>`, { parse_mode: 'HTML' });
+          await bot.telegram.sendMessage(chatId, `Заявка с сайта!\n${dt.format('DD.MM.YYYY')}\n${dt.format('HH:mm')}\n${data.fio}\n<a href="tel:${data.phoneRaw}">${data.phone}</a>`, { parse_mode: 'HTML' });
           //await bot.launch();
         } catch(err) {
           console.log(err.code);
