@@ -61,7 +61,7 @@ fastify.register((fastify, opts, next) => {
                     reply.send(err);
                     return
                 }
-                let dt = moment().utc().utcOffset(5).format('DD/MM/YYYY HH:mm');
+                let dt = moment().utc().utcOffset(5).format('HH:mm DD.MM.YYYY');
                 fields.phoneRaw = fields.phone.replace(/\s+|\+|\(|\)/g, '');
                 let bot = new Telegraf(botToken/*, { telegram: { agent: socksAgent } }*/);
                 //try {
@@ -91,7 +91,7 @@ fastify.register((fastify, opts, next) => {
         let data = req.body;
         let bot = new Telegraf(botToken/*, { telegram: { agent: socksAgent } }*/);
         try {
-          let dt = moment().utc().utcOffset(5).format('DD/MM/YYYY HH:mm');
+          let dt = moment().utc().utcOffset(5).format('HH:mm DD.MM.YYYY');
           data.phoneRaw = fields.phone.replace(/\s+|\+|\(|\)/g, '');
           bot.telegram.sendMessage(chatId, `${dt}\n${data.fio}\n<a href="tel:${data.phoneRaw}">${data.phone}</a>`, { parse_mode: 'HTML' });
           bot.launch();
