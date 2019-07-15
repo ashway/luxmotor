@@ -21,15 +21,20 @@ fastify.register(require('fastify-multipart'));
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 
+let selfURL = 'https://lux-motor.ru';
+let botToken = '556896286:AAH791dcePJHlImFEs3HYryHa8HDRljMyW4';
+
+if(dev) {
+    selfURL = 'https://dev.lux-motor.ru';
+    botToken = '659727031:AAFZ_8AXLTu2bBSej7_2UN5ujjlVQPsLggk';
+}
+
 fastify.register(require('fastify-cors'), {
   origin: '*',
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
 });
 
-const botTokenDev = '659727031:AAFZ_8AXLTu2bBSej7_2UN5ujjlVQPsLggk';
-const botToken = '556896286:AAH791dcePJHlImFEs3HYryHa8HDRljMyW4';
-
-let bot = new Telegraf(botTokenDev, { telegram: { agent: socksAgent } });
+let bot = new Telegraf(botToken/*, { telegram: { agent: socksAgent } }*/);
 
 fastify.register((fastify, opts, next) => {
   const app = Next({ dev });
@@ -64,7 +69,7 @@ fastify.register((fastify, opts, next) => {
                 let mediaGroup = [];
                 _.forEach(fields.files, file=>{
                     mediaGroup.push({
-                        'media': `https://dev.lux-motor.ru/static/uploadImg/${tempDir}/${file}`,
+                        'media': `${selfURL}/static/uploadImg/${tempDir}/${file}`,
                         'type': 'photo'
                     });
                 });
