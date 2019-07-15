@@ -27,7 +27,7 @@ let chatId = '-1001397757254';
 if(dev) {
     selfURL = 'https://dev.lux-motor.ru';
     botToken = '659727031:AAFZ_8AXLTu2bBSej7_2UN5ujjlVQPsLggk';
-    let chatId = '-1001204370141';
+    chatId = '-1001204370141';
 }
 
 fastify.register(require('fastify-cors'), {
