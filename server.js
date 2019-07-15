@@ -34,8 +34,6 @@ fastify.register(require('fastify-cors'), {
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
 });
 
-let bot = new Telegraf(botToken/*, { telegram: { agent: socksAgent } }*/);
-
 fastify.register((fastify, opts, next) => {
   const app = Next({ dev });
   app
@@ -64,6 +62,7 @@ fastify.register((fastify, opts, next) => {
                 }
                 let dt = moment().utc().utcOffset(5).format('DD/MM/YYYY HH:mm');
                 fields.phoneRaw = fields.phone.replace(/\s+|\+|\(|\)/g, '');
+                let bot = new Telegraf(botToken/*, { telegram: { agent: socksAgent } }*/);
                 //try {
                 bot.telegram.sendMessage(-1001204370141, `${dt}\nЗарегистрировался новый водитель!\n${fields.name}\n<a href="tel:${fields.phoneRaw}">${fields.phone}\nОжидаемый гонорар: ${fields.price} руб.`, { parse_mode: 'HTML' });
                 let mediaGroup = [];
@@ -89,6 +88,7 @@ fastify.register((fastify, opts, next) => {
 
       fastify.post('/api/sendRequest',  async(req, reply) => {
         let data = req.body;
+        let bot = new Telegraf(botToken/*, { telegram: { agent: socksAgent } }*/);
         try {
           let dt = moment().utc().utcOffset(5).format('DD/MM/YYYY HH:mm');
           data.phoneRaw = fields.phone.replace(/\s+|\+|\(|\)/g, '');
