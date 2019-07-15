@@ -3,7 +3,7 @@ import axios from "axios";
 import React from "react";
 import InputMask from 'react-input-mask';
 
-const apiUrl = ''; //'https://lux-motor.ru';
+const apiUrl = 'https://dev.lux-motor.ru';
 
 class RequestFormInner extends React.Component {
 

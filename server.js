@@ -3,18 +3,18 @@ const fs = require('fs');
 const fastify = require('fastify')({ logger: { level: 'error' } });
 const moment = require('moment');
 const Next = require('next');
-const Telegraf = require('telegraf')
+const Telegraf = require('telegraf');
 const _ = require('lodash');
 const pump = require('pump');
 const uuid = require('uuid/v1');
 
-const SocksAgent = require('socks5-https-client/lib/Agent');
+/*const SocksAgent = require('socks5-https-client/lib/Agent');
 const socksAgent = new SocksAgent({
     socksHost: '51.79.54.137',
     socksPort: '6900',
     socksUsername: 'proxyuser',
     socksPassword: 'proxy!pass'
-});
+});*/
 
 fastify.register(require('fastify-multipart'));
 

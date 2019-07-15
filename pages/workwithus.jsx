@@ -8,7 +8,7 @@ import _ from 'lodash';
 import axios from 'axios';
 
 import "../scss/style.scss";
-const apiUrl = ''; //'https://lux-motor.ru';
+const apiUrl = 'https://dev.lux-motor.ru';
 
 class WorkWithUsPage extends React.Component {
 
