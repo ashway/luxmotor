@@ -61,11 +61,10 @@ fastify.register((fastify, opts, next) => {
                     reply.send(err);
                     return
                 }
-                let dt = moment().utc().utcOffset(5).format('HH:mm DD.MM.YYYY');
                 fields.phoneRaw = fields.phone.replace(/\s+|\+|\(|\)/g, '');
                 let bot = new Telegraf(botToken/*, { telegram: { agent: socksAgent } }*/);
                 //try {
-                bot.telegram.sendMessage(chatId, `${dt}\nЗарегистрировался новый водитель!\n${fields.name}\n<a href="tel:${fields.phoneRaw}">${fields.phone}\nОжидаемый гонорар: ${fields.price} руб.`, { parse_mode: 'HTML' });
+                bot.telegram.sendMessage(chatId, `${moment().utc().utcOffset(5).format('HH:mm DD.MM.YYYY')}\nЗарегистрировался новый водитель!\n${fields.name}\n<a href="tel:${fields.phoneRaw}">${fields.phone}</a>\nОжидаемый гонорар: ${fields.price} руб.`, { parse_mode: 'HTML' });
                 let mediaGroup = [];
                 _.forEach(fields.files, file=>{
                     mediaGroup.push({
@@ -91,9 +90,8 @@ fastify.register((fastify, opts, next) => {
         let data = req.body;
         let bot = new Telegraf(botToken/*, { telegram: { agent: socksAgent } }*/);
         try {
-          let dt = moment().utc().utcOffset(5).format('HH:mm DD.MM.YYYY');
-          data.phoneRaw = fields.phone.replace(/\s+|\+|\(|\)/g, '');
-          bot.telegram.sendMessage(chatId, `${dt}\n${data.fio}\n<a href="tel:${data.phoneRaw}">${data.phone}</a>`, { parse_mode: 'HTML' });
+          data.phoneRaw = data.phone.replace(/\s+|\+|\(|\)/g, '');
+          bot.telegram.sendMessage(chatId, `${moment().utc().utcOffset(5).format('HH:mm DD.MM.YYYY')}\n${data.fio}\n<a href="tel:${data.phoneRaw}">${data.phone}</a>`, { parse_mode: 'HTML' });
           bot.launch();
         } catch(err) {
           console.log(err.code);
