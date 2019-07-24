@@ -13,6 +13,7 @@ export default () => {
                 <div className="f-menu">
                     <Link href="/terms"><a>Условия аренды</a></Link>
                     <Link href="/cars/premium/w222"><a>Парк автомобилей</a></Link>
+                    <Link href="/workwithus"><a>Работайте с нами</a></Link>
                     <Link href="/contact"><a>Контакты</a></Link>
                 </div>
             </div>

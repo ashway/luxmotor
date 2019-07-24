@@ -36,6 +36,14 @@ body {
   line-height: 22px;
 }
 
+ul {
+  @include margin-between(10px);
+  margin-left: 20px;
+  list-style-position: outside;
+  list-style-type: disc;
+}
+
+
 a { text-decoration: none; color: #303030; }
 
 .white { color: #ffffff; }
@@ -1100,8 +1108,6 @@ a { text-decoration: none; color: #303030; }
     }
   }
 
-
-
   @include respond-to(tablet) {
     border-radius: 30px;
   }
@@ -1146,10 +1152,13 @@ a { text-decoration: none; color: #303030; }
 .car-photos-loader {
   background-color: #ffffff;
   border-radius: 15px;
-  padding: 25px;
   text-align: center;
   border: 4px dotted #008fd2;
   cursor: pointer;
+
+  &>div {
+    padding: 25px;
+  }
 
   .file-list {
     margin-top: 20px;
@@ -1183,7 +1192,7 @@ a { text-decoration: none; color: #303030; }
         }
       }
       @include respond-to(tablet) {
-        width: 33.333%;
+        width: 50%;
       }
     }
   }
