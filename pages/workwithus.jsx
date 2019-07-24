@@ -179,7 +179,7 @@ class WorkWithUsPage extends React.Component {
                                     <div className="h2 bold">Анкета</div>
                                     <div className="form">
                                         {(!this.state.isPhoneValid)?<div>Для начала давайте подтвердим ваш номер телефона</div>:null}
-                                        <div className="flex-block"><InputMask className={`text-field w100 ${(this.state.invalidPhone) ? 'has-error' : ''}`} {...this.props} mask="+7(999) 999 99 99" placeholder="Номер телефона" maskChar=" " value={this.state.phone} onChange={this.handlePhone.bind(this)} />{(!this.state.isPhoneValidateSent)?<div className="button nowrap" onClick={()=>this.validatePhone()}>Подтвердить номер</div>:null}</div>
+                                        <div className="flex-block"><InputMask className={`text-field w100 ${(this.state.invalidPhone) ? 'has-error' : ''}`} {...this.props} mask="+7(999)9999999" placeholder="Номер телефона" maskChar=" " value={this.state.phone} onChange={this.handlePhone.bind(this)} />{(!this.state.isPhoneValidateSent)?<div className="button nowrap" onClick={()=>this.validatePhone()}>Подтвердить номер</div>:null}</div>
                                         <div>
                                             {(!this.state.isPhoneValidateSent || this.state.isPhoneValid)?null:
                                                 <div>
