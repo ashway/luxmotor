@@ -32,7 +32,7 @@ export default () => {
                         <div className="h3 mb10">Мы в мессенджерах и соцсетях</div>
                         <div className="socicons">
                             <a href="https://wa.me/79089084811" className="socialicon round WHATSAPP"></a>
-                            <a href="" className="socialicon round TELEGRAM"></a>
+                            <a href="https://t.me/luxmotor" className="socialicon round TELEGRAM"></a>
                         </div>
                     </div>
 

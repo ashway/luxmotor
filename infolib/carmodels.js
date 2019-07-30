@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     w222: {
         mark: 'Mercedes Benz',
         model: 'W222',

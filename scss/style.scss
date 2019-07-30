@@ -1024,6 +1024,28 @@ a { text-decoration: none; color: #303030; }
   }
 }
 
+.error404-page {
+  text-align: center;
+  font-size: 60px;
+  padding: 70px 0;
+  margin-bottom: 80px;
+  &>div:first-child {
+    font-size: 120px;
+    line-height: 140px;
+    font-weight: bold;
+  }
+
+  @include respond-to(tablet) {
+    font-size: 80px;
+    padding: 150px 0;
+    &>div:first-child {
+      font-size: 200px;
+      line-height: 220px;
+      font-weight: bold;
+    }
+  }
+}
+
 .current-car-mobile {
   font-size: 18px;
   line-height: 30px;

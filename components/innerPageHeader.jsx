@@ -24,7 +24,7 @@ export default (props) => {
                     <div className="hc-phone"><span className="phone-icon"/><a href="tel:+79089084811" className="h2 bold">8 908 908 48 11</a></div>
                     <div className="hc-social">
                         <a href="https://wa.me/79089084811" className="socialicon round WHATSAPP"/>
-                        <a href="" className="socialicon round TELEGRAM"/>
+                        <a href="https://t.me/luxmotor" className="socialicon round TELEGRAM"/>
                     </div>
                 </div>
             </div>
