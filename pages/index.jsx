@@ -47,7 +47,7 @@ class IndexPage extends React.Component {
                                 <div className="hc-phone"><span className="phone-icon"/><a href="tel:+79089084811" className="h2 bold">8 908 908 48 11</a></div>
                                 <div className="hc-social">
                                     <a href="https://wa.me/79089084811" className="socialicon round WHATSAPP"/>
-                                    <a href="" className="socialicon round TELEGRAM"/>
+                                    <a href="https://t.me/luxmotor" className="socialicon round TELEGRAM"/>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@ class IndexPage extends React.Component {
 
                             <div className="flex-block space-between">
                                 <div className="h-menu">
-                                    <div><Link href="/cars/premium/w222"><a className="button">Парк автомобилей</a></Link></div>
+                                    <div><Link href="/cars"><a className="button">Парк автомобилей</a></Link></div>
                                     <div><Link href="/terms"><a className="button">Условия аренды</a></Link></div>
                                     <div><Link href="/contact"><a className="button">Контакты</a></Link></div>
                                 </div>

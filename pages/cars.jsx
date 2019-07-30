@@ -12,20 +12,23 @@ import "../scss/style.scss"
 import catalog from '../infolib/carcatalog.js';
 import carList from '../infolib/cars.js';
 import Car from '../components/car.jsx';
+import Error from './_error.js';
 
 class CarsPage extends React.Component {
 
     state = { mobileOpen: false };
 
-    static async getInitialProps({ asPath  }) {
+    static async getInitialProps({asPath}) {
         let split = asPath.split('/');
-        return { mark: split[2], model: split[3]  }
+        let page = split[3] || split[2];
+        if(!page) page = 'w222';
+        return { page }
     }
 
     toggleMobileCatalogList = () => { this.setState({ mobileOpen: !this.state.mobileOpen })};
 
     render() {
-        let page = this.props.model || this.props.mark;
+        let page = this.props.page;
         let model  = carsCatalog[page];
         let carInfo = carList[page];
         return (model)?(
@@ -99,7 +102,7 @@ class CarsPage extends React.Component {
                 <Services/>
                 <Footer/>
             </div>
-        ):null
+        ):<Error statusCode="404"/>
     }
 }
 
