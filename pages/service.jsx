@@ -4,7 +4,9 @@ import Services from '../components/services.jsx';
 import InnerPageOrderForm from '../components/innerPageOrderForm.jsx';
 import InnerPageHeader from '../components/innerPageHeader.jsx';
 import CarModel from '../components/carmodel.jsx';
+import Car from '../components/car.jsx';
 import _ from 'lodash';
+import axios from 'axios';
 
 import "../scss/style.scss"
 
@@ -14,7 +16,6 @@ let services = {
         description: 'Прокат машин премиум-класса с водителем в Екатеринбурге от компании Lux Motor.',
         keywords: 'прокат автомобилей премиум класса,прокат премиум авто,прокат авто премиум класса,прокат машин премиум,прокат машин премиум класса,заказ мерседеса,мерседес под заказ,заказ мерседеса с водителем,аренда мерседес,аренда мерседес с водителем,аренда авто мерседес',
         caption: 'Прокат авто премиум-класса в Екатеринбурге',
-        cars: ['w222','w221','range','tlc200'],
         leftblock: <div className="inner-page-text">
             <div className="taleft h2 bold">Автомобили премиум-класса</div>
             <div className="mb30">Подчеркнуть высокий статус мероприятия, встретить важного гостя или организовать поездку для делового партнера – для этих и многих других целей отличным выбором станет заказ авто представительского класса. Заказ мерседеса с водителем в Екатеринбурге сделает ваше перемещение по нужным адресам не только статусным, но и максимально быстрым и комфортным.</div>
@@ -27,7 +28,6 @@ let services = {
         description: 'Аренда минивенов с водителем в Екатеринбурге от компании Lux Motor.',
         keywords: 'аренда микроавтобуса,аренда микроавтобуса екатеринбург,аренда микроавтобуса с водителем,аренда микроавтобуса с водителем екатеринбург,аренда микроавтобуса недорого,микроавтобус пассажирский аренда,аренда микроавтобуса с водителем недорого,аренда микроавтобуса человек с водителем,взять микроавтобус в аренду,снять микроавтобус в аренду',
         caption: 'Аренда микроавтобусов в Екатеринбурге',
-        cars: ['viano','vclass','sprinter'],
         leftblock: <div className="inner-page-text">
             <div className="taleft h2 bold">Минивэны</div>
             <div className="mb30">Вам нужно организовать поездку группы людей без лишних хлопот? Аренда микроавтобуса с водителем в Екатеринбурге от компании Lux Motor позволит решить эту задачу в самые короткие сроки - пассажирские микроавтобусы в аренду всегда в наличии по привлекательным ценам.</div>
@@ -40,7 +40,7 @@ let services = {
         description: 'Ретроавтомобили напрокат в Екатеринбурге от компании Lux Motor.',
         keywords: 'прокат ретро авто,ретро автомобиль прокат,ретро автомобиль аренда,аренда ретро авто,ретро автомобиль свадьба,прокат ретро машин',
         caption: 'Ретроавтомобили в аренду в Екатеринбурге',
-        cars: ['fordthunderbird','plymouthfury'],
+        isGroup: 1,
         leftblock: <div className="inner-page-text">
             <div className="taleft h2 bold">Ретроавтомобили</div>
             <div className="mb30">Ретроавтомобиль – оригинальное средство передвижения, которое никого не оставит равнодушным. Прокат ретро авто от Lux Motor позволит организовать незабываемую романтическую поездку, которая подарит массу впечатлений, или устроить запоминающуюся фотосессию. Кроме того, ретроавтомобиль в аренду – неординарное решение для свадьбы, торжественных случаев или просто приятных сюрпризов.</div>
@@ -53,7 +53,7 @@ let services = {
         description: 'Трансфер в (из) аэропорт Кольцово, отель, гостиницу от компании Lux Motor.',
         keywords: 'заказ автобуса,заказ автобуса екатеринбург,автобус аренда,заказ автобус онлайн,заказ автобуса на свадьбу',
         caption: 'Автобус в аренду в Екатеринбурге',
-        cars: ['HigerKLQ6826Q','YutongZK6122H9'],
+        isGroup: 1,
         leftblock: <div className="inner-page-text">
             <div className="taleft h2 bold">Автобусы</div>
             <div className="mb30">Точность прибытия, безопасность и комфорт пассажиров, опытные водители и отличное техническое состояние автобусов в аренду – главные составляющие поездки, организованной с помощью компании Lux Motor.</div>
@@ -66,7 +66,6 @@ let services = {
         description: 'Свадебные кортежи напрокат и по любому другому поводу от компании Lux Motor.',
         keywords: 'заказ кортежа,свадебный кортеж прокат,свадебный кортеж аренда,заказ свадебного кортежа,кортеж екатеринбург',
         caption: 'Заказ кортежа в Екатеринбурге',
-        cars: ['w222','w221','camry','tlc200','range','vclass','viano','eclass'],
         leftblock: <div className="inner-page-text">
             <div className="taleft h2 bold">Кортежи</div>
             <div className="mb30">Свадебный кортеж в прокат – безусловно, украшение и один из главных атрибутов безупречной свадьбы. Заказ свадебного кортежа в Екатеринбурге от компании Lux Motor позволит избежать множества затруднений и накладок, зачастую возникающих при подготовке к торжественному событию. Парк автомобилей позволяет нашим клиентам подобрать кортеж на любой вкус – в каталоге вы найдете и представительские автомобили, и ретромашины, и лимузины.</div>
@@ -79,7 +78,6 @@ let services = {
         description: 'Аренда мерседеса на свадьбу, лимузин на свадьбу в Екатеринбурге от компании Lux Motor.',
         keywords: 'машина на свадьбу,аренда мерседес на свадьбу,автомобиль на свадьбу,свадебный кортеж,лимузин на свадьбу,машина на свадьбу екатеринбург,аренда машины на свадьбу,лимузин на свадьбу екатеринбург,автомобили на свадьбу екатеринбург,аренда автомобиля на свадьбу',
         caption: 'Автомобиль на свадьбу в Екатеринбурге',
-        cars: ['w222','w221','camry','tlc200','sprinter','range','vclass','viano','eclass'],
         leftblock: <div className="inner-page-text">
             <div className="taleft h2 bold">Автомобиль на свадьбу</div>
             <div className="mb30">Красивый автомобиль на свадьбу – важная составляющая торжественного мероприятия. Перед свадебными автомобилями стоит непростая задача – с комфортом перевозить главных виновников торжества и их гостей, украшать свадебные фотографии, подчеркивать статус праздника.</div>
@@ -92,7 +90,6 @@ let services = {
         description: 'Трансфер в (из) аэропорт Кольцово, отель, гостиницу от компании Lux Motor.',
         keywords: 'трансфер в аэропорт,трансфер аэропорт отель,трансфер аэропорт гостиница,трансфер аэропорт центр,заказать трансфер из аэропорта,трансфер екатеринбург аэропорт',
         caption: 'Заказать трансфер из аэропорта в Екатеринбурге',
-        cars: ['w222','w221','camry','tlc200','sprinter','range','vclass','viano','eclass'],
         leftblock: <div className="inner-page-text">
             <div className="taleft h2 bold">Трансфер в аэропорт</div>
             <div className="mb30">Заказать трансфер аэропорт-отель, аэропорт-центр, а также по любому другому адресу быстро и удобно можно, заполнив форму заказа на нашем сайте или связавшись со специалистами Lux Motor удобным вам способом.</div>
@@ -105,7 +102,6 @@ let services = {
         description: 'Организация бизнес-поездок и встреч от компании Lux Motor - прокат премиум-авто в Екатеринбурге.',
         keywords: 'прокат авто бизнес класса,прокат авто бизнес класса екатеринбург,организация бизнес поездок',
         caption: 'Прокат автомобилей бизнес-класса в Екатеринбурге',
-        cars: ['camry','viano','eclass'],
         leftblock: <div className="inner-page-text">
             <div className="taleft h2 bold">Бизнес-поездки</div>
             <div className="mb30">Организация бизнес-поездок в Екатеринбурге с помощью проката авто бизнес-класса от компании Lux Motor – это простой и надежный способ позволить себе думать только о деле и избавить себя от лишних хлопот. Вам нужно лишь оставить заявку на нашем сайте или связаться с нашими специалистами другим удобным для вас способом.</div>
@@ -118,7 +114,6 @@ let services = {
         description: 'Авто для встречи из роддома, машина на выписку в Екатеринбурге от компании Lux Motor.',
         keywords: 'машина для встречи из роддома,авто для встречи из роддома,машина из роддома,машина на выписку из роддома,забрать из роддома машина,заказать машину из роддома',
         caption: 'Заказать машину из роддома в Екатеринбурге',
-        cars: ['w222','w221','camry','eclass'],
         leftblock: <div className="inner-page-text">
             <div className="taleft h2 bold">Встреча из роддома</div>
             <div className="mb30">Рождение малыша – один из главных моментов в жизни его родителей. Сделать выписку мамы с младенцем еще более радостной и запоминающейся поможет машина для встречи из роддома с аккуратным профессиональным водителем от Lux Motor.</div>
@@ -128,24 +123,31 @@ let services = {
 };
 
 class ServicePage extends React.Component {
+
     static async getInitialProps({ asPath  }) {
-        return { page: asPath.split('/')[2]  }
+        let page = asPath.split('/')[2];
+        let serviceCarsData = await axios.get(`https://api.lux-motor.ru/services/list/${page}`);
+        let serviceCars = serviceCarsData.data;
+        _.each(serviceCars, c=>c.photos=c.photos.split(','));
+        return { page, serviceCars: serviceCars }
     }
 
     render() {
+
+        console.log(this.props.serviceCars);
 
         let pageInfo = services[this.props.page];
         return (pageInfo)?(
             <div>
                 <Header title={pageInfo.title} description={pageInfo.description} keywords={pageInfo.keywords} />
                 <div className="base-content">
-                    <InnerPageHeader caption={pageInfo.caption} background="static/img/service-bg/premiumcar.jpg" />
+                    <InnerPageHeader caption={pageInfo.caption} background="static/img/background/service.jpg" />
                     <div className="content mb50minus service-page">
                         {pageInfo.leftblock}
                         <div className="w100 mb60">
                             <div className="h1 mb40">Мы можем предложить вам</div>
                             <div className="auto-card-container small" style={{ marginBottom: 0 }}>
-                                {_.map(pageInfo.cars, alias=><CarModel key={alias} alias={alias}/>)}
+                                {_.map(this.props.serviceCars, car=><CarModel key={car.alias} isCar={pageInfo.isGroup} data={car}/>)}
                             </div>
                             <InnerPageOrderForm />
                         </div>

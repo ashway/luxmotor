@@ -7,15 +7,18 @@ import InnerPageOrderForm from '../components/innerPageOrderForm.jsx';
 import _ from 'lodash';
 import "../scss/style.scss"
 import React from "react";
-import carList from '../infolib/carmodels.js';
+import axios from 'axios';
 
 class IndexPage extends React.Component {
 
     static async getInitialProps() {
-        return { randomCars: _.take(_.shuffle(_.keys(_.pickBy(carList, 'url'))), 10) }
+        let randomCars = await axios.get('https://api.lux-motor.ru/model/list/random');
+        let classPrice = await axios.get('https://api.lux-motor.ru/class/price');
+        return { randomCars: randomCars.data, classPrice: _.keyBy(classPrice.data, 'class') }
     }
 
     render() {
+
         return (
             <div>
                 <Header
@@ -80,7 +83,7 @@ class IndexPage extends React.Component {
                                     <div className="icon" style={{ backgroundImage: 'url(/static/img/sclass.jpg)'}}/>
                                     <div>
                                         <div className="h3">Премиум-класс</div>
-                                        <div className="h1">от <span className="bold blue">1200р</span><span className="h3"> в час</span></div>
+                                        <div className="h1">от <span className="bold blue">{this.props.classPrice.premium.price}р</span><span className="h3"> в час</span></div>
                                     </div>
                                 </a>
                             </Link>
@@ -90,7 +93,7 @@ class IndexPage extends React.Component {
                                     <div className="icon" style={{backgroundImage: 'url(/static/img/sprinter.jpg)'}}/>
                                     <div>
                                         <div className="h3">Микроавтобусы</div>
-                                        <div className="h1">от <span className="bold blue">1200р</span><span className="h3"> в час</span></div>
+                                        <div className="h1">от <span className="bold blue">{this.props.classPrice.microbus.price}р</span><span className="h3"> в час</span></div>
                                     </div>
                                 </a>
                             </Link>
@@ -100,7 +103,7 @@ class IndexPage extends React.Component {
                                     <div className="icon" style={{backgroundImage: 'url(/static/img/vclass.jpg)'}}/>
                                     <div>
                                         <div className="h3">Минивэны</div>
-                                        <div className="h1">от <span className="bold blue">800р</span><span className="h3"> в час</span></div>
+                                        <div className="h1">от <span className="bold blue">{this.props.classPrice.minivan.price}р</span><span className="h3"> в час</span></div>
                                     </div>
                                 </a>
                             </Link>
@@ -110,7 +113,7 @@ class IndexPage extends React.Component {
                                     <div className="icon" style={{backgroundImage: 'url(/static/img/eclass.jpg)'}}/>
                                     <div>
                                         <div className="h3">Бизнес-класс</div>
-                                        <div className="h1">от <span className="bold blue">700р</span><span className="h3"> в час</span></div>
+                                        <div className="h1">от <span className="bold blue">{this.props.classPrice.business.price}р</span><span className="h3"> в час</span></div>
                                     </div>
                                 </a>
                             </Link>
@@ -155,7 +158,7 @@ class IndexPage extends React.Component {
                                     <div className="icon" style={{ backgroundImage: 'url(/static/img/sclass.jpg)'}}/>
                                     <div>
                                         <div className="h3">Премиум-класс</div>
-                                        <div className="h1">от <span className="bold blue">1200р</span><span className="h3"> в час</span></div>
+                                        <div className="h1">от <span className="bold blue">{this.props.classPrice.premium.price}р</span><span className="h3"> в час</span></div>
                                     </div>
                                 </a>
                             </Link>
@@ -165,7 +168,7 @@ class IndexPage extends React.Component {
                                     <div className="icon" style={{backgroundImage: 'url(/static/img/sprinter.jpg)'}}/>
                                     <div>
                                         <div className="h3">Микроавтобусы</div>
-                                        <div className="h1">от <span className="bold blue">1200р</span><span className="h3"> в час</span></div>
+                                        <div className="h1">от <span className="bold blue">{this.props.classPrice.microbus.price}р</span><span className="h3"> в час</span></div>
                                     </div>
                                 </a>
                             </Link>
@@ -175,7 +178,7 @@ class IndexPage extends React.Component {
                                     <div className="icon" style={{backgroundImage: 'url(/static/img/vclass.jpg)'}}/>
                                     <div>
                                         <div className="h3">Минивэны</div>
-                                        <div className="h1">от <span className="bold blue">800р</span><span className="h3"> в час</span></div>
+                                        <div className="h1">от <span className="bold blue">{this.props.classPrice.minivan.price}р</span><span className="h3"> в час</span></div>
                                     </div>
                                 </a>
                             </Link>
@@ -185,7 +188,7 @@ class IndexPage extends React.Component {
                                     <div className="icon" style={{backgroundImage: 'url(/static/img/eclass.jpg)'}}/>
                                     <div>
                                         <div className="h3">Бизнес-класс</div>
-                                        <div className="h1">от <span className="bold blue">700р</span><span className="h3"> в час</span></div>
+                                        <div className="h1">от <span className="bold blue">{this.props.classPrice.business.price}р</span><span className="h3"> в час</span></div>
                                     </div>
                                 </a>
                             </Link>
@@ -200,7 +203,7 @@ class IndexPage extends React.Component {
                     <div className="content mb60 mt20">
                         <div className="h1 bold tacenter mb40">У нас вы можете заказать</div>
                         <div className="auto-card-container align-center">
-                            {_.map(this.props.randomCars, alias=><CarModel key={alias} alias={alias}/>)}
+                            {_.map(this.props.randomCars, car=><CarModel key={car.cover} data={car}/>)}
                         </div>
                     </div>
                     <Footer/>

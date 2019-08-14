@@ -9,9 +9,16 @@
   },
   "author": "",
   "license": "ISC",
+  "browserslist": [
+    ">1%",
+    "last 4 versions",
+    "ios >= 6",
+    "not ie < 9"
+  ],
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
+    "autoprefixer": "^9.6.1",
     "axios": "^0.19.0",
     "cross-env": "^5.2.0",
     "fastify": "^2.4.1",
@@ -24,6 +31,7 @@
     "next-ym": "^2.3.5",
     "node-sass": "^4.12.0",
     "node-telegram-bot-api": "^0.30.0",
+    "postcss": "^7.0.17",
     "react": "^16.8.6",
     "react-background-image-loader": "0.0.5",
     "react-dom": "^16.8.6",

@@ -3,7 +3,6 @@ import "../scss/style.scss"
 import Header from '../components/header.jsx';
 import Footer from '../components/footer.jsx';
 import Services from '../components/services.jsx';
-import InnerPageOrderForm from '../components/innerPageOrderForm.jsx';
 import InnerPageHeader from '../components/innerPageHeader.jsx';
 import "../scss/style.scss"
 
@@ -19,17 +18,11 @@ class Error extends React.Component {
                 <Header
                     title="Error 404"
                     description="" />
-
                 <div className="base-content">
-
                     <InnerPageHeader caption="" background="static/img/background/contact.jpg" />
-
                     <div className="content mb50minus error404-page">
-
                         <div>404</div>
                         <div>ошибка</div>
-
-
                     </div>
                 </div>
                 <Services/>

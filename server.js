@@ -35,15 +35,15 @@ fastify.register((fastify, opts, next) => {
     const app = Next({ dev });
 
     let handleCar = (req, reply) => {
-        if(carModels[req.params.model]) {
+        if(true || carModels[req.params.model]) {
             return app.render(req.req, reply.res, '/cars', req.query).then(() => {
                 reply.sent = true;
             })
-        } else {
+        }/* else {
             return app.render404(req.req, reply.res).then(() => {
                 reply.sent = true;
             })
-        }
+        }*/
     };
 
       app
@@ -111,9 +111,6 @@ fastify.register((fastify, opts, next) => {
           });
 
           fastify.get('/service/:serviceName', (req, reply) => {
-
-              console.log(req.params.serviceName);
-
               if(_.includes(['premium','minivan','retro','bus','cortege','wedding','transfer','business','meeting'], req.params.serviceName)) {
                   return app.render(req.req, reply.res, '/service', req.query).then(() => {
                       reply.sent = true;
