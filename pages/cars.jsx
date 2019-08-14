@@ -54,7 +54,7 @@ class CarsPage extends React.Component {
         if(!page) page = 'w222';
 
         //-- Запрашиваем список тачек
-        let carListArr = await axios.get(`https://api.lux-motor.ru/car/list/${page}`);
+        let carListArr = await axios.get(`https://api.lux-motor.ru/car/list/${page}/active`);
         let carList = carListArr.data;
 
         if(modelList[page].is_group) {
