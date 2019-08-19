@@ -126,7 +126,7 @@ class ServicePage extends React.Component {
 
     static async getInitialProps({ asPath  }) {
         let page = asPath.split('/')[2];
-        let serviceCarsData = await axios.get(`https://api.lux-motor.ru/services/list/${page}`);
+        let serviceCarsData = await axios.get(`https://api.lux-motor.ru/public/services/list/${page}`);
         let serviceCars = serviceCarsData.data;
         _.each(serviceCars, c=>c.photos=c.photos.split(','));
         return { page, serviceCars: serviceCars }

@@ -12,15 +12,17 @@ import Error from './_error.js';
 import axios from 'axios';
 
 let classListArr = [
-    { alias: 'premium', name: 'Премиум-класс'},
-    { alias: 'business', name: 'Бизнес-класс'},
-    { alias: 'minivan', name: 'Минивэны'},
-    { alias: 'microbus', name: 'Микроавтобусы'},
-    { alias: 'suv', name: 'Внедорожники'},
-    { alias: 'bus', name: 'Автобусы' },
-    { alias: 'retro', name: 'Ретроавтомобили' },
-    { alias: 'limousine', name: 'Лимузины' },
+    { alias: 'premium', className: 'Премиум-класс'},
+    { alias: 'business', className: 'Бизнес-класс'},
+    { alias: 'minivan', className: 'Минивэны'},
+    { alias: 'microbus', className: 'Микроавтобусы'},
+    { alias: 'suv', className: 'Внедорожники'},
+    { alias: 'bus', className: 'Автобусы' },
+    { alias: 'retro', className: 'Ретроавтомобили' },
+    { alias: 'limousine', className: 'Лимузины' },
 ];
+
+let classList = _.keyBy(classListArr, 'alias');
 
 class CarsPage extends React.Component {
 
@@ -28,16 +30,16 @@ class CarsPage extends React.Component {
 
     static async getInitialProps({asPath}) {
 
+        let split = asPath.split('/');
+        let page = split[3] || split[2];
+        if(!page) page = 'w222';
+
         //-- Список моделей
-        let markListArr  = await axios.get('https://api.lux-motor.ru/mark/list');
-        let markList = _.keyBy(markListArr.data, 'alias');
 
-        let modelListArr = await axios.get('https://api.lux-motor.ru/model/list');
+        let modelListArr = await axios.get(`https://api.lux-motor.ru/public/model/list`);
         let modelList = _.keyBy(modelListArr.data, 'alias');
-        _.each(modelList, m=>m.markName = (markList[m.mark]||{}).name);
-
+        _.each(modelList, m=>{if(m.is_group) m.className = classList[m.class].className});
         let modelListGroups = _.groupBy(modelList, 'class');
-        let classList = _.keyBy(classListArr, 'alias');
 
         _.each(classList, c=>{
         if(
@@ -46,25 +48,20 @@ class CarsPage extends React.Component {
             modelListGroups[c.alias] &&
             _.isArray(modelListGroups[c.alias]) &&
             modelListGroups[c.alias].length>0) {
-            c.sub = modelListGroups[c.alias];
+            c.sub = _.sortBy(modelListGroups[c.alias], 'markName');
         }
         });
-        let split = asPath.split('/');
-        let page = split[3] || split[2];
-        if(!page) page = 'w222';
 
         //-- Запрашиваем список тачек
-        let carListArr = await axios.get(`https://api.lux-motor.ru/car/list/${page}/active`);
+        let carListArr = await axios.get(`https://api.lux-motor.ru/public/car/list/${page}/active`);
         let carList = carListArr.data;
-
         if(modelList[page].is_group) {
             _.each(carList, c=>{
                 c.showModel = true;
-                c.markName = (markList[c.mark]||{}).name;
-                c.modelName = (modelList[c.model]||{}).name;
             });
         }
-        return { page, catalog: classList, markList, modelList, carList }
+
+        return { page, catalog: classList, modelList, carList }
     }
 
     componentDidMount() {
@@ -89,11 +86,11 @@ class CarsPage extends React.Component {
                             <div className="cars-list">
                                 {_.map(this.props.catalog, item=><div key={item.alias}>
                                     { (item.sub)?<div>
-                                    <div className="h3 blue">{item.name}</div>
+                                    <div className="h3 blue">{item.className}</div>
                                         <div>
-                                            {_.map(item.sub, subitem=><Link key={subitem.alias} href={`/cars/${item.alias}/${subitem.alias}`}><a className={`bold ${(subitem.alias==page)?'active':''}`}><span className="mr5">{subitem.markName}</span><span>{subitem.name}</span></a></Link>)}
+                                            {_.map(item.sub, subitem=><Link key={subitem.alias} href={`/cars/${item.alias}/${subitem.alias}`}><a className={`bold ${(subitem.alias==page)?'active':''}`}><span className="mr5">{subitem.markName}</span><span>{subitem.modelName}</span></a></Link>)}
                                         </div>
-                                    </div>:<div><Link href={`/cars/${item.alias}`}><a className={`h3 blue ${(item.alias==page)?'active':''}`}>{item.name}</a></Link></div> }
+                                    </div>:<div><Link href={`/cars/${item.alias}`}><a className={`h3 blue ${(item.alias==page)?'active':''}`}>{item.className}</a></Link></div> }
                                 </div>)}
                             </div>
                         </div>
@@ -101,13 +98,13 @@ class CarsPage extends React.Component {
                         <div className="w100 mb60">
 
                             <div className="mb30 flex-block fb-from-wide">
-                                <div className="h1 bold w100 mr30 show-from-tablet"><span className="mr10">{model.markName || ''}</span><span>{model.name || ''}</span></div>
+                                <div className="h1 bold w100 mr30 show-from-tablet">{`${model.className || ''} ${model.markName || ''} ${model.modelName || ''}`}</div>
 
                                 <div className="inner-page-text hide-after-mobile">
-                                    <div className={`current-car-mobile taleft h2 bold ${(this.state.mobileOpen)?'opened':''}`} onClick={()=>this.toggleMobileCatalogList()}>{`${model.markName || ''} ${model.name || ''}`}</div>
+                                    <div className={`current-car-mobile taleft h2 bold ${(this.state.mobileOpen)?'opened':''}`} onClick={()=>this.toggleMobileCatalogList()}>{`${model.className || ''} ${model.markName || ''} ${model.modelName || ''}`}</div>
                                     <div className={`cars-list-mobile ${(this.state.mobileOpen)?'show':''}`}>
                                         {_.map(this.props.catalog, item=>(item.sub)?
-                                            _.map(item.sub, subitem=><Link key={subitem.alias} href={`/cars/${item.alias}/${subitem.alias}`}><a className={`bold ${(subitem.alias==page)?'active':''}`}><span className="mr5">{subitem.markName}</span><span>{subitem.name}</span></a></Link>):
+                                            _.map(item.sub, subitem=><Link key={subitem.alias} href={`/cars/${item.alias}/${subitem.alias}`}><a className={`bold ${(subitem.alias==page)?'active':''}`}><span className="mr5">{subitem.markName}</span><span>{subitem.modelName}</span></a></Link>):
                                             <Link key={item.alias} href={`/cars/${item.alias}`}><a className={`bold ${(item.alias==page)?'active':''}`}>{item.name}</a></Link>) }
                                     </div>
                                 </div>
@@ -133,13 +130,13 @@ class CarsPage extends React.Component {
                                 {_.map(this.state.carList, (item, i)=><Car key={i} data={item}/>)}
                             </div>:<div className="h2 tacenter mb60">К сожалению, на данный момент мы не можем предложить вам автомобили этого класса</div>}
 
-                            <div className="mb40 mt20 extrasmall-font flex-block">
+                            {(this.state.loadingCars)?<div/>:<div className="mb40 mt20 extrasmall-font flex-block">
                                 <div className="attention mr20">!</div>
                                 <div>
                                     <div>Междугородний пробег оплачивается в обе стороны</div>
                                     <div>Дополнительно оплачивается подача и возврат за пределы Екатеринбурга</div>
                                 </div>
-                            </div>
+                            </div>}
 
                             <InnerPageOrderForm/>
                         </div>

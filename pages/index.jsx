@@ -12,8 +12,8 @@ import axios from 'axios';
 class IndexPage extends React.Component {
 
     static async getInitialProps() {
-        let randomCars = await axios.get('https://api.lux-motor.ru/model/list/random');
-        let classPrice = await axios.get('https://api.lux-motor.ru/class/price');
+        let randomCars = await axios.get('https://api.lux-motor.ru/public/model/list/random');
+        let classPrice = await axios.get('https://api.lux-motor.ru/public/class/price');
         return { randomCars: randomCars.data, classPrice: _.keyBy(classPrice.data, 'class') }
     }
 

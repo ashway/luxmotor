@@ -20,7 +20,7 @@ class Car extends React.Component {
         return (car) ? <div className="auto-card-fullinfo">
             <div onClick={()=>this.toggleInfo(true)} style={{ backgroundImage: `url(https://img.lux-motor.ru/car/${car.alias}/${car.cover}.jpg)` }}>
                 <img className="imgse" src={`https://img.lux-motor.ru/car/${car.alias}/${car.cover}.jpg`}/>
-                {(car.capacity)?<div className="ac-capacity">{car.capacity} {(car.capacity%100%10>0&&car.capacity%100%10<5)?(car.capacity%100%10===1)?'место':'места':'мест'}</div>:null}
+                {(car.seats)?<div className="ac-capacity">{car.seats} {(car.seats%100%10>0&&car.seats%100%10<5)?(car.seats%100%10===1)?'место':'места':'мест'}</div>:null}
             </div>
             {(car.showModel)?<div className="h3 bold mt10">{car.markName || ''} {car.modelName || ''}</div>:null}
             {(car.price || car.outcity_price || car.mintime)?<div className="flex-block pos-center">
